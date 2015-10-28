@@ -1,0 +1,12 @@
+{
+  "name": "babbletron",
+  "version": "0.1.0",
+  "description": "VoIP Client/Server",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^0.34.1"
+  }
+}
