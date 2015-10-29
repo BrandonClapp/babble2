@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var config = require('./config.js');
+var config = require('./config');
 var del = require('del');
 var plugins = require('gulp-load-plugins')({lazy:true});
 
