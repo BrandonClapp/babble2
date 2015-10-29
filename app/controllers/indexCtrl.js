@@ -1,1 +1,1 @@
-require('../menus/helper.js').display();
+require('./menus/helper.js').display();
