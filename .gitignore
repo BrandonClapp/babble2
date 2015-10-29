@@ -1,2 +1,3 @@
-/node_modules
-/app/styles/css
+client/node_modules
+client/app/styles/css
+server/node_modules
