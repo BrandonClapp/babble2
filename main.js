@@ -7,7 +7,8 @@ var mainWindow = null;
 app.on('ready', function(){
   mainWindow = new BrowserWindow({
     width: 450,
-    height: 600
+    height: 600,
+    //frame: false
   });
 
   mainWindow.loadUrl(__dirname + '/app/index.html');
