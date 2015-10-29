@@ -1,1 +1,1 @@
-alert('red alert!');
+require('../menus/helper.js').display();
