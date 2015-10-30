@@ -5,12 +5,12 @@
     <title>Babble</title>
     <link href="./styles/css/base.css" rel="stylesheet" type="type/css" />
     <script src="../node_modules/angular/angular.js"></script>
+    <script src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="./app.js"></script>
     <script src="./services/menuSvc.js"></script>
-    <script src="controllers/indexCtrl.js"></script>
+    <script src="controllers/homeCtrl.js"></script>
   </head>
-  <body ng-controller="indexCtrl">
-    <h1>Babble</h1>
-    <div>{{ test }}</div>
+  <body>
+    <div ui-view></div>
   </body>
 </html>

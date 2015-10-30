@@ -1,7 +1,7 @@
 (function(){
   'use strict'
 
-  angular.module('babble').controller('indexCtrl',  ['$scope', 'menuSvc',
+  angular.module('babble').controller('homeCtrl',  ['$scope', 'menuSvc',
     function($scope, menuSvc) {
 
       menuSvc.display();
