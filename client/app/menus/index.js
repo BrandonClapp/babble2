@@ -4,10 +4,9 @@
   var remote = require('remote');
   var Menu = remote.require('menu');
   var MenuItem = remote.require('menu-item');
+  var ipc = require('ipc');
 
-  module.exports = {
-    display: display
-  }
+
 
   var menu = null;
 
@@ -18,7 +17,9 @@
         {
           label: 'Quit',
           accelerator: 'CmdOrCtrl+Q',
-          click: function() { app.quit(); }
+          click: function() {
+              ipc.send('quit');
+          }
         },
       ]
     },
@@ -27,7 +28,13 @@
       submenu: [
         {
           label: 'New Connection',
-          accelerator: 'CmdOrCtrl+N'
+          accelerator: 'CmdOrCtrl+N',
+          click: function() {
+              console.log('New connection clicked.');
+              if(exports.events.newConnectionClick){
+                  exports.events.newConnectionClick();
+              }
+          }
         },
         {
           label: 'Disconnect'
@@ -54,9 +61,19 @@
     }
   ];
 
-  function display(){
+  var display = function() {
+      console.log('display called from index.js');
     menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
   }
+
+    var exports = {
+      display: display,
+      events: {
+          newConnectionClick: null
+      }
+    }
+
+  module.exports = exports;
 
 })();
