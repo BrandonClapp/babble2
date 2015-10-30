@@ -74,6 +74,6 @@
       }
     }
 
+    display();
   module.exports = exports;
-
 })();

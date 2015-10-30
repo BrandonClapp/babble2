@@ -18,5 +18,6 @@ app.on('ready', function(){
      app.quit();
   });
 
-  mainWindow.loadUrl('file://' + __dirname + '/app/index.html');
+  mainWindow.loadUrl('file://' + __dirname + '/app/index.html')
+  mainWindow.setMenu(null);
 });

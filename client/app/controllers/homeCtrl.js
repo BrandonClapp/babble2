@@ -4,7 +4,7 @@
   angular.module('babble').controller('homeCtrl',  ['$scope', 'menuSvc', 'authSvc',
     function($scope, menuSvc, authSvc) {
         console.log('loading homeCtrl');
-      menuSvc.display();
+      
 
       menuSvc.on('newConnectionClick', function(){
           alert('new window');
