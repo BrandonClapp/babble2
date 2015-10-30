@@ -14,5 +14,8 @@
     "gulp-load-plugins": "^1.0.0",
     "gulp-sass": "^2.1.0",
     "gulp-util": "^3.0.7"
+  },
+  "dependencies": {
+    "angular": "^1.4.7"
   }
 }

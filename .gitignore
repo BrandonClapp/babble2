@@ -1,5 +1,6 @@
 .DS_Store
 *.log
+node_modules
 client/node_modules
 client/app/styles/css
 server/node_modules
