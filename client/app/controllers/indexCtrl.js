@@ -1,5 +1,6 @@
 (function(){
-  
+  'use strict'
+
   angular.module('babble').controller('indexCtrl',  ['$scope', 'menuSvc',
     function($scope, menuSvc) {
 
