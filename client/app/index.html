@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="babble">
   <head>
     <meta charset="UTF-8">
     <title>Babble</title>
     <link href="./styles/css/base.css" rel="stylesheet" type="type/css" />
     <script src="../node_modules/angular/angular.js"></script>
+    <script src="./app.js"></script>
+    <script src="./services/menuSvc.js"></script>
     <script src="controllers/indexCtrl.js"></script>
   </head>
-  <body>
+  <body ng-controller="indexCtrl">
     <h1>Babble</h1>
-    <div>And the content</div>
-    <div>{{ 3 + 7 }}</div>
+    <div>{{ test }}</div>
   </body>
 </html>
