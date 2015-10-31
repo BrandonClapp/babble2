@@ -5,13 +5,7 @@
         var service = {};
 
         service.connect = function(host, port, username, password) {
-
-            // swal({
-            //   title: "Connecting",
-            //   timer: 2000,
-            //   showConfirmButton: false
-            // });
-            //'
+          
             var connectingDialog = vex.dialog.open({
               message: 'Connecting to ' + host + ':' + port + (username ? ' as ' + username : '') + '...',
               showCloseButton: false,

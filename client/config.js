@@ -1,8 +1,8 @@
 module.exports = {
-  ext: ['./app/styles/ext'],
+  ext: ['./app/assets/styles/ext'],
   sass: [
-      './app/styles/sass/**/*.scss',
-      './app/styles/sass/**/*.sass'
+      './app/assets/styles/sass/**/*.scss',
+      './app/assets/styles/sass/**/*.sass'
   ],
-  css: './app/styles/css/'
+  css: './app/assets/styles/css/'
 }
