@@ -1,0 +1,9 @@
+{
+  "name": "babbletron-dummy-client",
+  "version": "0.1.0",
+  "description": "VoIP Client/Server",
+  "main": "client.js",
+  "dependencies": {
+    "json-socket": "*"
+  }
+}

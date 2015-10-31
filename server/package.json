@@ -1,0 +1,10 @@
+{
+  "name": "babbletron-server",
+  "version": "0.1.0",
+  "description": "VoIP Client/Server",
+  "main": "server.js",
+  "dependencies": {
+    "json-socket": "*",
+    "node-uuid": "*"
+  }
+}
