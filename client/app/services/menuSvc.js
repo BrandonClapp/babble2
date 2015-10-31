@@ -2,20 +2,20 @@
   'use strict'
 
     var menus = {
-      index: require('./../menus/index.js')
+      home: require('./../menus/home.js')
     }
 
   angular.module('babble').factory('menuSvc', function() {
     var service = {};
     var actions = {}
 
-    menus.index.events.newConnectionClick = function() {
+    menus.home.events.newConnectionClick = function() {
         notifySubscribers('newConnectionClick');
     }
 
     service.display = function(menuName){
         console.log('display called menuSvc');
-      menus[menuName || 'index'].display();
+      menus[menuName || 'home'].display();
     }
 
     service.on = function(eventName, cb) {

@@ -1,27 +1,10 @@
 (function(){
   'use strict'
 
-  var app = angular.module('babble', ['ui.router']);
+  var app = angular.module('babble', []);
 
-  app.config(['$stateProvider', '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider){
+  app.config(function(){
 
-      // $urlRouterProvider.otherwise('/');
-      //
-      // $stateProvider
-      //   .state('home', {
-      //     url: "/",
-      //     templateUrl: "./home.html",
-      //     controller: 'homeCtrl'
-      //   })
-      //
-      //   .state('newConnection', {
-      //     url: "/newConnection",
-      //     templateUrl: "./newConnection.html",
-      //     controller: function(){
-      //       console.log('loading newConnection Ctrl');
-      //     }
-      //   });
-    }]);
+  });
 
 })();

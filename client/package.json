@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "angular": "^1.4.7",
-    "angular-ui-router": "^0.2.15",
     "jquery": "^2.1.4",
     "json-socket": "^0.1.2",
     "lodash": "^3.10.1",

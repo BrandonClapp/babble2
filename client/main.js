@@ -25,11 +25,11 @@ app.on('ready', function(){
       width: 300,
       height: 300,
     });
-    
+
     newConnectionWindow.loadUrl('file://' + __dirname + '/app/views/newConnection.html');
   });
 
-  mainWindow.loadUrl('file://' + __dirname + '/app/views/index.html')
+  mainWindow.loadUrl('file://' + __dirname + '/app/views/home.html')
   // maybe initialize this to index menu to stop flickering.
   mainWindow.setMenu(null);
 });
