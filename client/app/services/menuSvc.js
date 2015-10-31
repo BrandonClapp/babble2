@@ -5,13 +5,11 @@
       index: require('./menus/index.js')
     }
 
-  angular.module('babble').factory('menuSvc', function(){
+  angular.module('babble').factory('menuSvc', function() {
     var service = {};
     var actions = {}
 
-    menus.index.events.newConnectionClick = function(){
-        // notify all subscribers
-        console.log('newConnectionClick from menuSvc');
+    menus.index.events.newConnectionClick = function() {
         notifySubscribers('newConnectionClick');
     }
 
