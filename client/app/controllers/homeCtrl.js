@@ -9,10 +9,10 @@
       menuSvc.on('newConnectionClick', function(){
         vex.dialog.open({
           message: 'Enter your username and password:',
-          input: "<input name=\"username\" type=\"text\" placeholder=\"Username\" required />\n<input name=\"password\" type=\"password\" placeholder=\"Password\" required />",
+          input: "<input name=\"host\" type=\"text\" placeholder=\"Host\" value=\"127.0.0.1\" required />\n<input name=\"port\" type=\"text\" placeholder=\"Port\" value=\"8888\" required />\n<input name=\"username\" type=\"text\" placeholder=\"Username\" />\n<input name=\"password\" type=\"password\" placeholder=\"Password\" />\n",
           buttons: [
             $.extend({}, vex.dialog.buttons.YES, {
-              text: 'Login'
+              text: 'Connect'
             }), $.extend({}, vex.dialog.buttons.NO, {
               text: 'Back'
             })
@@ -21,14 +21,12 @@
             if (data === false) {
               return console.log('Cancelled');
             }
-            return console.log('Username', data.username, 'Password', data.password);
+            connect(data.host, data.port, data.username, data.password);
           }
           });
       });
 
-      $scope.test = '360 no $scope';
-
-      $scope.connect = function(host, port, username, password) {
+      var connect = function(host, port, username, password) {
           authSvc.connect(host, port, username, password);
       }
     }]

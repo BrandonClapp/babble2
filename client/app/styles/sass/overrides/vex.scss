@@ -1,3 +1,12 @@
-.vex.vex-theme-default .vex-content, .vex.vex-theme-flat-attack .vex-content, .vex.vex-theme-wireframe .vex-content {
-  max-width: 80% !important;
+.vex.vex-theme-wireframe,
+.vex.vex-theme-flat-attack,
+.vex.vex-theme-default {
+
+  padding-top: 110px;
+  padding-bottom: 0px;
+
+  .vex-content {
+    max-width: 80% !important;
+  }
+
 }
