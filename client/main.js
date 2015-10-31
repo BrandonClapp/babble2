@@ -6,6 +6,7 @@ var BrowserWindow = require('browser-window');
 
 // window declaration
 var mainWindow = null;
+var newConnectionWindow = null;
 
 app.on('ready', function(){
   mainWindow = new BrowserWindow({
@@ -18,6 +19,15 @@ app.on('ready', function(){
      app.quit();
   });
 
-  mainWindow.loadUrl('file://' + __dirname + '/app/index.html')
+  ipc.on('newConnectionWindow', function(){
+    newConnectionWindow = new BrowserWindow({
+      width: 300,
+      height: 300,
+    });
+
+    newConnectionWindow.loadUrl('file://' + __dirname + '/app/views/newConnection.html')
+  });
+
+  mainWindow.loadUrl('file://' + __dirname + '/app/views/index.html')
   mainWindow.setMenu(null);
 });

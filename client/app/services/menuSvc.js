@@ -2,7 +2,7 @@
   'use strict'
 
     var menus = {
-      index: require('./menus/index.js')
+      index: require('./../menus/index.js')
     }
 
   angular.module('babble').factory('menuSvc', function() {

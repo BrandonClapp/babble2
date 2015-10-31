@@ -11,7 +11,7 @@
       $stateProvider
         .state('home', {
           url: "/",
-          templateUrl: "./views/home.html",
+          templateUrl: "./home.html",
           controller: 'homeCtrl'
         });
     }]);
