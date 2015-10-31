@@ -1,20 +1,20 @@
 $font-stack:    Helvetica, sans-serif;
 $font-size:     13px;
-$primary-color: #fff;
+$primary-color: #222;
 $primary-bg-color: #551A8B;
 
 body {
   font: $font-size $font-stack;
   color: $primary-color;
-  background: darken($primary-bg-color, 10%);
+  background: lighten($primary-bg-color, 60%);
   overflow: hidden;
 }
 
 .content {
   height: 600px;
   width: 450px;
-  background: url('./../../../images/main.jpeg');
-  background-size: cover;
-  background-position: bottom center;
-  opacity: 0.5;
+  // background: url('./../../../images/main.jpeg');
+  // background-size: cover;
+  // background-position: bottom center;
+  // opacity: 0.5;
 }

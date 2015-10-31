@@ -6,8 +6,6 @@
   var MenuItem = remote.require('menu-item');
   var ipc = require('ipc');
 
-
-
   var menu = null;
 
   var template = [

@@ -8,7 +8,7 @@
 
       menuSvc.on('newConnectionClick', function(){
         vex.dialog.open({
-          message: 'Enter your username and password:',
+          message: 'New Connection',
           input: "<input name=\"host\" type=\"text\" placeholder=\"Host\" value=\"127.0.0.1\" required />\n<input name=\"port\" type=\"text\" placeholder=\"Port\" value=\"8888\" required />\n<input name=\"username\" type=\"text\" placeholder=\"Username\" />\n<input name=\"password\" type=\"password\" placeholder=\"Password\" />\n",
           buttons: [
             $.extend({}, vex.dialog.buttons.YES, {
