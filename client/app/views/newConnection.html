@@ -8,7 +8,28 @@
   </head>
   <body>
     <div>
-      {{test}}
+      <form ng-submit="onConnectSubmit(form)">
+        <div>
+          <label>Host</label>
+          <input type="text" ng-model="form.host" placeholder="Host" value="127.0.0.1" required/>
+        </div>
+        <div>
+          <label>Port</label>
+          <input type="text" ng-model="form.port" placeholder="Port" value="8888" required/>
+        </div>
+        <div>
+          <label>Username</label>
+          <input type="text" ng-model="form.username" placeholder="Username" />
+        </div>
+        <div>
+          <label>Password</label>
+          <input type="password" ng-model="form.password" placeholder="Password" />
+        </div>
+        <div>
+          <button type="button">Cancel</button>
+          <button type="submit">Connect</button>
+        </div>
+      </form>
     </div>
   </body>
 </html>

@@ -22,8 +22,8 @@ app.on('ready', function(){
 
   ipc.on('newConnectionWindow', function(){
     newConnectionWindow = new BrowserWindow({
-      width: 300,
-      height: 300,
+      width: 450,
+      height: 350,
     });
 
     newConnectionWindow.loadUrl('file://' + __dirname + '/app/views/newConnection.html');

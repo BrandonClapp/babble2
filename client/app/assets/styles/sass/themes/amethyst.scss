@@ -6,7 +6,7 @@ $primary-bg-color: #551A8B;
 body {
   font: $font-size $font-stack;
   color: $primary-color;
-  background: lighten($primary-bg-color, 60%);
+  background: lighten($primary-bg-color, 50%);
   overflow: hidden;
 }
 
