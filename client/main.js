@@ -16,6 +16,7 @@ app.on('ready', function(){
   });
 
   ipc.on('quit', function(e){
+    console.log('quitting...');
      app.quit();
   });
 
@@ -24,10 +25,11 @@ app.on('ready', function(){
       width: 300,
       height: 300,
     });
-
-    newConnectionWindow.loadUrl('file://' + __dirname + '/app/views/newConnection.html')
+    
+    newConnectionWindow.loadUrl('file://' + __dirname + '/app/views/newConnection.html');
   });
 
   mainWindow.loadUrl('file://' + __dirname + '/app/views/index.html')
+  // maybe initialize this to index menu to stop flickering.
   mainWindow.setMenu(null);
 });

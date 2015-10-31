@@ -6,14 +6,22 @@
   app.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider){
 
-      $urlRouterProvider.otherwise('/');
-
-      $stateProvider
-        .state('home', {
-          url: "/",
-          templateUrl: "./home.html",
-          controller: 'homeCtrl'
-        });
+      // $urlRouterProvider.otherwise('/');
+      //
+      // $stateProvider
+      //   .state('home', {
+      //     url: "/",
+      //     templateUrl: "./home.html",
+      //     controller: 'homeCtrl'
+      //   })
+      //
+      //   .state('newConnection', {
+      //     url: "/newConnection",
+      //     templateUrl: "./newConnection.html",
+      //     controller: function(){
+      //       console.log('loading newConnection Ctrl');
+      //     }
+      //   });
     }]);
 
 })();

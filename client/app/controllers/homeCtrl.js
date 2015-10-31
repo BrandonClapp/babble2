@@ -5,6 +5,7 @@
     function($scope, menuSvc, authSvc, windowSvc) {
         console.log('loading homeCtrl');
 
+        menuSvc.display();
 
       menuSvc.on('newConnectionClick', function(){
         windowSvc.open('newConnectionWindow');
