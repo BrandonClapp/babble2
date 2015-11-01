@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "json-socket": "*",
-    "node-uuid": "*"
+    "node-uuid": "*",
+    "lodash-node": "*"
   }
 }

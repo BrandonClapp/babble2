@@ -15,7 +15,6 @@ socket.connect(port, host);
 socket.on('connect', function() { //Don't send until we're connected
 
     console.log('client is connected');
-    socket.sendMessage({messageType: 'chat', data: 'Go go go fire in the hole!'});
     
     socket.on('message', function(message) {
         console.log('Server says: ' + JSON.stringify(message));
