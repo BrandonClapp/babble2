@@ -16,14 +16,11 @@
     <script src="./../services/windowSvc.js"></script>
     <script src="./../controllers/homeCtrl.js"></script>
     <script src="./../controllers/newConnectionCtrl.js"></script>
-
   </head>
   <body>
-
     <div ng-show="display.newConnectionOverlay" class="content-overlay">
       <div class="newConnection" ng-include="'newConnection.html'"></div>
     </div>
-
     <div class="content">
       newConnectionOverlay: {{display.newConnectionOverlay}}
       <button ng-click="newConnectionOverlay = true">Connect</button>

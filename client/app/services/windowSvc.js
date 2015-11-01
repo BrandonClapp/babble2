@@ -1,4 +1,4 @@
-(function(ipc){
+(function(ipc) {
   'use strict'
 
   angular.module('babble').factory('windowSvc', function() {
