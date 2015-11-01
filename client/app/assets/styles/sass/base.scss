@@ -1,4 +1,5 @@
 @import 'reset';
+@import 'variables';
 
 $font-stack:    Helvetica, sans-serif;
 $font-size:     13px;
@@ -9,4 +10,26 @@ body {
   font: $font-size $font-stack;
   color: $primary-color;
   background: $primary-bg-color;
+  overflow: hidden;
+}
+
+.content {
+  height: $app-height;
+  width: $app-width;
+}
+
+.content-overlay {
+  position: absolute;
+  height: $app-height;
+  width: $app-width;
+}
+
+.newConnection {
+  height: $app-height / 2;
+  width: $app-width - 80px;
+  margin-top: $app-height / 4;
+  margin-bottom: $app-height / 4;
+  margin-left: 40px;
+  margin-right: 40px;
+  position: relative;
 }

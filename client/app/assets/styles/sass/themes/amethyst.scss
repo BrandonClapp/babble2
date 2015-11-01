@@ -1,20 +1,28 @@
+@import './../variables';
+
 $font-stack:    Helvetica, sans-serif;
 $font-size:     13px;
-$primary-color: #222;
+$primary-color: #fff;
 $primary-bg-color: #551A8B;
 
 body {
   font: $font-size $font-stack;
   color: $primary-color;
   background: lighten($primary-bg-color, 50%);
-  overflow: hidden;
 }
 
 .content {
-  height: 600px;
-  width: 450px;
-  // background: url('./../../../images/main.jpeg');
-  // background-size: cover;
-  // background-position: bottom center;
-  // opacity: 0.5;
+  background: url('./../../../images/main.jpeg');
+  background-size: cover;
+  background-position: bottom center;
+}
+
+.content-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.newConnection {
+  background: rgba(0, 0, 0, .6);
+  border:1px solid white;
+  border-radius: 2px;
 }

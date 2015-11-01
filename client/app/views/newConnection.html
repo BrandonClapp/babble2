@@ -1,35 +1,24 @@
-<!DOCTYPE html>
-<html ng-app="babble" ng-controller="newConnectionCtrl">
-  <head>
-    <meta charset="UTF-8">
-    <title>Babble</title>
-    <link rel="import" href="_styles.html">
-    <link rel="import" href="_scripts.html">
-  </head>
-  <body>
+<div ng-controller="newConnectionCtrl">
+  <form ng-submit="onConnectSubmit(form)">
     <div>
-      <form ng-submit="onConnectSubmit(form)">
-        <div>
-          <label>Host</label>
-          <input type="text" ng-model="form.host" placeholder="Host" value="127.0.0.1" required/>
-        </div>
-        <div>
-          <label>Port</label>
-          <input type="text" ng-model="form.port" placeholder="Port" value="8888" required/>
-        </div>
-        <div>
-          <label>Username</label>
-          <input type="text" ng-model="form.username" placeholder="Username" />
-        </div>
-        <div>
-          <label>Password</label>
-          <input type="password" ng-model="form.password" placeholder="Password" />
-        </div>
-        <div>
-          <button type="button">Cancel</button>
-          <button type="submit">Connect</button>
-        </div>
-      </form>
+      <label>Host</label>
+      <input type="text" ng-model="form.host" placeholder="Host" value="127.0.0.1" required/>
     </div>
-  </body>
-</html>
+    <div>
+      <label>Port</label>
+      <input type="text" ng-model="form.port" placeholder="Port" value="8888" required/>
+    </div>
+    <div>
+      <label>Username</label>
+      <input type="text" ng-model="form.username" placeholder="Username" />
+    </div>
+    <div>
+      <label>Password</label>
+      <input type="password" ng-model="form.password" placeholder="Password" />
+    </div>
+    <div>
+      <button type="button">Cancel</button>
+      <button type="submit">Connect</button>
+    </div>
+  </form>
+</div>

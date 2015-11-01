@@ -4,11 +4,29 @@
     <meta charset="UTF-8">
     <title>Babble</title>
     <link rel="import" href="_styles.html">
-    <link rel="import" href="_scripts.html">
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="./../../node_modules/lodash/index.js"></script>
+    <script src="./../../node_modules/angular/angular.js"></script>
+    <script src="./../../node_modules/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="./../../node_modules/vex-js/js/vex.combined.min.js"></script>
+    <script>vex.defaultOptions.className = 'vex-theme-wireframe';</script>
+    <script src="./../app.js"></script>
+    <script src="./../services/menuSvc.js"></script>
+    <script src="./../services/authSvc.js"></script>
+    <script src="./../services/windowSvc.js"></script>
+    <script src="./../controllers/homeCtrl.js"></script>
+    <script src="./../controllers/newConnectionCtrl.js"></script>
+
   </head>
   <body>
-    <div>
-      Home from home.html
+
+    <div ng-show="display.newConnectionOverlay" class="content-overlay">
+      <div class="newConnection" ng-include="'newConnection.html'"></div>
+    </div>
+
+    <div class="content">
+      newConnectionOverlay: {{display.newConnectionOverlay}}
+      <button ng-click="newConnectionOverlay = true">Connect</button>
     </div>
   </body>
 </html>

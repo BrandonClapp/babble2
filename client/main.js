@@ -10,7 +10,7 @@ var newConnectionWindow = null;
 
 app.on('ready', function(){
   mainWindow = new BrowserWindow({
-    width: 450,
+    width: 500,
     height: 600,
     //frame: false
   });
@@ -20,14 +20,14 @@ app.on('ready', function(){
      app.quit();
   });
 
-  ipc.on('newConnectionWindow', function(){
-    newConnectionWindow = new BrowserWindow({
-      width: 450,
-      height: 350,
-    });
-
-    newConnectionWindow.loadUrl('file://' + __dirname + '/app/views/newConnection.html');
-  });
+  // ipc.on('newConnectionWindow', function(){
+  //   newConnectionWindow = new BrowserWindow({
+  //     width: 450,
+  //     height: 350,
+  //   });
+  //
+  //   newConnectionWindow.loadUrl('file://' + __dirname + '/app/views/newConnection.html');
+  // });
 
   mainWindow.loadUrl('file://' + __dirname + '/app/views/home.html')
   // maybe initialize this to index menu to stop flickering.
