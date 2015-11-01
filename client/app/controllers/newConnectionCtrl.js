@@ -1,24 +1,17 @@
 (function() {
   'use strict'
 
-  angular.module('babble').controller('newConnectionCtrl', ['$scope', 'windowSvc',
-    function($scope, windowSvc) {
-
-      $scope.test = 'newConnectionCtrl working.';
+  angular.module('babble').controller('newConnectionCtrl', ['$scope', 'authSvc',
+    function($scope, authSvc) {
 
       $scope.onConnectSubmit = function(form) {
-        console.log('Connect submissions');
-        console.log(form);
-
-        swal({
-          title: "Connecting...",
-          text: "Now connecting to " + form.host + ":" + form.port,
-          type: "info",
-          showCancelButton: false,
-          showConfirmButton: false
-        });
+        authSvc.connect(form.host, form.port, form.username, form.password);
       }
 
+      $scope.onCancelNewConnection = function() {
+        $scope.form = {};
+        $scope.display.newConnectionOverlay = false;
+      }
     }
   ])
 })();

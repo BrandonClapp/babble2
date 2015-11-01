@@ -1,12 +1,10 @@
 (function(homeMenu) {
   'use strict'
 
+  homeMenu.display();
+
   angular.module('babble').controller('homeCtrl', ['$scope', 'authSvc', 'windowSvc',
     function($scope, authSvc, windowSvc) {
-
-      console.log('loading homeCtrl');
-
-      homeMenu.display();
 
       $scope.display = {
         newConnectionOverlay: false
@@ -17,12 +15,7 @@
         console.log('newConnectionClick from homeCtrl', $scope.display.newConnectionOverlay);
         $scope.$apply();
       }
-
-      var connect = function(host, port, username, password) {
-        authSvc.connect(host, port, username, password);
-      }
-
-
+      
     }
   ])
 })(require('./../services/homeMenu.js'));
