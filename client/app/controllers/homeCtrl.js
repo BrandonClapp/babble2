@@ -10,6 +10,7 @@
 
     $scope.onChatSend = function(message){
       tcp.send('chat', message);
+      $scope.message = '';
     }
 
     events.on('newConnectionClick', function() {
@@ -17,12 +18,17 @@
       $scope.$apply();
     });
 
+    $scope.connected = false;
     events.on('connected', function() {
-      $scope.message = 'You\'re connected, yo!\n';
+      $scope.message = 'I\'m connected, yo!\n';
+      $scope.connected = true;
+      $scope.$apply();
     });
 
+    $scope.messages = [];
     events.on('chat', function(data){
-      $scope.message += data + '\n';
+      $scope.messages.push(data);
+      $scope.$apply();
     });
 
   }])

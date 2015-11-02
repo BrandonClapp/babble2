@@ -3,12 +3,12 @@
 $font-stack:    Helvetica, sans-serif;
 $font-size:     13px;
 $primary-color: #fff;
-$primary-bg-color: #551A8B;
+$primary-bg-color: #000;
 
 body {
   font: $font-size $font-stack;
   color: $primary-color;
-  background: lighten($primary-bg-color, 50%);
+  background: $primary-bg-color;
 }
 
 .content {

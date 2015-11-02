@@ -19,10 +19,16 @@
       <div class="newConnection" ng-include="'newConnection.html'"></div>
     </div>
     <div class="content">
-      <input type="text" ng-model="message" />
-      <button type="button" ng-click="onChatSend(message)">Send</button>
-      <hr />
-      {{messages}}
+      <div ng-show="connected">
+        <form ng-submit="onChatSend(message)">
+          <input type="text" ng-model="message" />
+          <button type="submit">Send</button>
+        </form>
+        <hr />
+        <div ng-repeat="msg in messages">
+          {{ msg.user.username + ': ' + msg.data }}
+        </div>
+      </div>
     </div>
   </body>
 </html>
