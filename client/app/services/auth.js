@@ -12,7 +12,10 @@
   }
 
   var service = {
-    connect: connect
+    connect: connect,
+    events: {
+      connected: null
+    }
   }
 
   module.exports = service;

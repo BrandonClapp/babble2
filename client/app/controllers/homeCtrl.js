@@ -2,8 +2,7 @@
   'use strict'
   homeMenu.display();
 
-  angular.module('babble').controller('homeCtrl', ['$scope', 'windowSvc',
-    function($scope, windowSvc) {
+  angular.module('babble').controller('homeCtrl', ['$scope', function($scope) {
 
       $scope.display = {
         newConnectionOverlay: false
@@ -14,9 +13,10 @@
         $scope.$apply();
       }
 
-      // tcp.events.connected = function() {
-      //   console.log('homeCtrl knows that tcp is connected');
-      // }
+      tcp.events.connected = function() {
+        $scope.message = 'You\'re connected, yo!';
+      }
+
     }
   ])
 })(require('./../services/homeMenu.js'), require('./../services/tcp.js'));

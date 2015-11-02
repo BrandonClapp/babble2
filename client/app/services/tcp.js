@@ -1,31 +1,34 @@
-'use strict'
+(function(){
+  'use strict'
 
-var net = require('net');
-var JsonSocket = require('json-socket');
+  var net = require('net');
+  var JsonSocket = require('json-socket');
 
-var readline = require('readline');
-var rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+  var connect = function(host, port, username, password) {
+    return new Promise(function(resolve, reject) {
+      let netsocket = new net.Socket();
+      let socket = new JsonSocket(new net.Socket());
+      socket.connect(port, host);
 
-var connect = function(host, port, username, password) {
-  return new Promise(function(resolve, reject) {
-    var netsocket = new net.Socket();
-    var socket = new JsonSocket(new net.Socket()); //Decorate a standard net.Socket with JsonSocket
-    socket.connect(port, host);
-    socket.on('connect', function() {
-        resolve();
+      socket.on('connect', function() {
+          resolve();
+          if(exports.events.connected) {
+            exports.events.connected();
+          }
+      });
+
+      socket.on('error', function(err){
+        reject(err);
+      });
     });
+  }
 
-    socket.on('error', function(err){
-      reject(err);
-    });
-  });
-}
+  var exports = {
+    connect: connect,
+    events: {
+      connected: null
+    }
+  }
 
-var exports = {
-  connect: connect,
-}
-
-module.exports = exports;
+  module.exports = exports;
+})();
