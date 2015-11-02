@@ -20,6 +20,7 @@ server.on('connection', function(socket) { //This is a standard net.Socket
     socket = new JsonSocket(socket); //Now we've decorated the net.Socket to be a JsonSocket
 	var connectionId = uuid.v1();
 	var user = {
+		username: 'Anon#' + (Math.floor((Math.random() * 10000)) + 1),
 		connectionId: connectionId,
 		channelId: 0
 	};
@@ -28,7 +29,7 @@ server.on('connection', function(socket) { //This is a standard net.Socket
 		socket: socket
 	}
 	addClient(client);
-	addUserToChannel(user, 1);
+	joinUserToChannel(user, 1);
 
     console.log('A wild client connected! Now we have ' + clientsCount() + ' connected clients');
 
@@ -36,11 +37,11 @@ server.on('connection', function(socket) { //This is a standard net.Socket
         handleMessage(user, message);
     });
     socket.on('end', function () {
-		deleteClient(connectionId);
+		deleteClient(user);
     	console.log('Connection id ' + connectionId + ' ended, now we have ' + clientsCount() + ' connected clients');
     });
     socket.on('error', function (err) {
-		deleteClient(connectionId);
+		deleteClient(user);
     	console.log(err);
     	console.log('Connection id ' + connectionId + ' ended, now we have ' + clientsCount() + ' connected clients');
     });
@@ -52,9 +53,25 @@ function handleMessage(user, message) {
 	console.log('handling message type: ' + message.messageType);
 	switch (message.messageType) {
 		case 'chat':
-			broadcastChannel(user.channelId, message);
+			handleChatMessage(user, message);
+			break;
+		case 'userJoinChannelRequest':
+			handleUserJoinChannelRequestMessage(user, message);
+			break;	
+		default:
+			console.log('Unable to find handler for message type: ' + message.messageType);
 			break;
 	}
+}
+
+function handleChatMessage(user, message) {
+	broadcastChannel(user.channelId, {messageType: 'chat', data: {user: user, data: message.data}});
+}
+
+function handleUserJoinChannelRequestMessage(user, message) {
+	var channelId = message.data;
+	joinUserToChannel(user, channelId);
+	broadcastAll({messageType: 'userJoinChannelResponse', data: user});
 }
 
 // Broadcast
@@ -102,15 +119,16 @@ function addClient(client) {
 	clients.push(client);
 }
 
-function deleteClient(connectionId) {
-	_.remove(clients, {connectionId: connectionId});
+function deleteClient(user) {
+	removeUserFromChannel(user);
+	_.remove(clients, {user: {connectionId: user.connectionId}});
 };
 
 function clientsCount() {
 	return clients.length;
 }
 
-function addUserToChannel(user, channelId) {
+function joinUserToChannel(user, channelId) {
 	var channel = _.find(channels, {id: channelId});
 	if (!channel) { 
 		console.log('addUserToChannel: unable to find channelId ' + channelId);

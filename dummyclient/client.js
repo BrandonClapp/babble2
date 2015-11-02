@@ -7,6 +7,8 @@ var rl = readline.createInterface({
   output: process.stdout
 });
 
+var channels = [];
+
 var port = 8888; //The same port that the server is listening on
 var host = '127.0.0.1';
 var netsocket = new net.Socket();
@@ -17,7 +19,7 @@ socket.on('connect', function() { //Don't send until we're connected
     console.log('client is connected');
     
     socket.on('message', function(message) {
-        console.log('Server says: ' + JSON.stringify(message));
+        handleMessage(message);
     });
     
     rl.on('line', function (line) {
@@ -26,8 +28,26 @@ socket.on('connect', function() { //Don't send until we're connected
             socket.end();
         }
         else {
-            socket.sendMessage({messageType: 'chat', data: line});
+            var splits = line.split(' ');
+            if (splits[0] == 'joinChannel') {
+                socket.sendMessage({messageType:'userJoinChannelRequest', data: parseInt(splits[1])})
+            }
+            
+            else {
+                socket.sendMessage({messageType: 'chat', data: line});                
+            }
         }
     });
     
 });
+
+function handleMessage(message) {
+    switch (message.messageType) {
+        case 'chat':
+            console.log(message.data.user.username + ': ' + message.data.data);
+            break;
+        case 'userJoinChannelResponse':
+            console.log('Server says: ' + JSON.stringify(message));
+            break;
+    }
+}
