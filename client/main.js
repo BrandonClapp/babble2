@@ -31,5 +31,5 @@ app.on('ready', function(){
 
   mainWindow.loadUrl('file://' + __dirname + '/app/views/home.html')
   // maybe initialize this to index menu to stop flickering.
-  mainWindow.setMenu(null);
+  //mainWindow.setMenu(null);
 });

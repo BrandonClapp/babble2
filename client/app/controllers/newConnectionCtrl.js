@@ -1,11 +1,14 @@
-(function() {
+(function(vex, auth) {
   'use strict'
 
-  angular.module('babble').controller('newConnectionCtrl', ['$scope', 'authSvc',
-    function($scope, authSvc) {
+  angular.module('babble').controller('newConnectionCtrl', ['$scope', function($scope) {
 
       $scope.onConnectSubmit = function(form) {
-        authSvc.connect(form.host, form.port, form.username, form.password);
+        auth.connect(form.host, form.port, form.username, form.password).then(function(){
+          vex.dialog.alert('Successfully connected. Message of the day!');
+        }, function(err){
+          vex.dialog.alert('Error while connecting: ' + err.toString());
+        });
       }
 
       $scope.onCancelNewConnection = function() {
@@ -14,4 +17,4 @@
       }
     }
   ])
-})();
+})(vex, require('./../services/auth.js'));

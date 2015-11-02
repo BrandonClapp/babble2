@@ -1,12 +1,9 @@
-(function(homeMenu) {
+(function(homeMenu, tcp) {
   'use strict'
-
-  var tcp = require('./../services/tcp.js');
-
   homeMenu.display();
 
-  angular.module('babble').controller('homeCtrl', ['$scope', 'authSvc', 'windowSvc',
-    function($scope, authSvc, windowSvc) {
+  angular.module('babble').controller('homeCtrl', ['$scope', 'windowSvc',
+    function($scope, windowSvc) {
 
       $scope.display = {
         newConnectionOverlay: false
@@ -17,9 +14,9 @@
         $scope.$apply();
       }
 
-      tcp.events.connected = function() {
-        console.log('homeCtrl knows that tcp is connected');
-      }
+      // tcp.events.connected = function() {
+      //   console.log('homeCtrl knows that tcp is connected');
+      // }
     }
   ])
-})(require('./../services/homeMenu.js'));
+})(require('./../services/homeMenu.js'), require('./../services/tcp.js'));
