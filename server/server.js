@@ -30,6 +30,7 @@ server.on('connection', function(socket) { //This is a standard net.Socket
 	}
 	addClient(client);
 	joinUserToChannel(user, 1);
+	socket.sendMessage({messageType: 'credentialResponse', data: user});
 
     console.log('A wild client connected! Now we have ' + clientsCount() + ' connected clients');
 
@@ -55,6 +56,9 @@ function handleMessage(user, message) {
 		case 'chat':
 			handleChatMessage(user, message);
 			break;
+		case 'getAllChannelsRequest':
+			handleGetAllChannelsRequestMessage(user, message);
+			break;
 		case 'userJoinChannelRequest':
 			handleUserJoinChannelRequestMessage(user, message);
 			break;	
@@ -66,6 +70,10 @@ function handleMessage(user, message) {
 
 function handleChatMessage(user, message) {
 	broadcastChannel(user.channelId, {messageType: 'chat', data: {user: user, data: message.data}});
+}
+
+function handleGetAllChannelsRequestMessage(user, message) {
+	broadcastAll({messageType: 'getAllChannelsResponse', data: channels});
 }
 
 function handleUserJoinChannelRequestMessage(user, message) {

@@ -7,6 +7,7 @@ var rl = readline.createInterface({
   output: process.stdout
 });
 
+var myUser = {};
 var channels = [];
 
 var port = 8888; //The same port that the server is listening on
@@ -43,11 +44,21 @@ socket.on('connect', function() { //Don't send until we're connected
 
 function handleMessage(message) {
     switch (message.messageType) {
+        case 'credentialResponse':
+            myUser = message.data;
+            console.log('im authenticated? my credential is ', myUser);
+            socket.sendMessage({messageType:'getAllChannelsRequest'});
+            break;
         case 'chat':
             console.log(message.data.user.username + ': ' + message.data.data);
             break;
+        case 'getAllChannelsResponse':
+            channels = message.data;
+            console.log('current channel information: ');
+	        console.log(JSON.stringify(channels, null, 2));
+            break;
         case 'userJoinChannelResponse':
-            console.log('Server says: ' + JSON.stringify(message));
+            var user = message.data;
             break;
     }
 }
