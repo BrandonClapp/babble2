@@ -19,6 +19,10 @@
       socket.on('error', function(err){
         reject(err);
       });
+      
+      socket.on('message', function(message){
+        events.fire(message.messageType, message.data);
+      });
     });
   }
 
