@@ -15,6 +15,7 @@
         buttons: []
       });
 
+      // make this a promise.
       tcp.connect(host, port, function(){
         vex.close(connectingDialog.data().vex.id);
         // resolve promise.

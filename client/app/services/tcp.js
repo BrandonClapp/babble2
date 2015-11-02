@@ -1,6 +1,8 @@
 'use strict'
 
-var connect = function(host, port, cb) {
+
+
+var connect = function(host, port) {
   var net = require('net');
   var JsonSocket = require('json-socket');
 
@@ -17,7 +19,10 @@ var connect = function(host, port, cb) {
   var socket = new JsonSocket(new net.Socket()); //Decorate a standard net.Socket with JsonSocket
   socket.connect(port, host);
   socket.on('connect', function() { //Don't send until we're connected
-      cb();
+      if(exports.events.connected) {
+        exports.events.connected();
+      }
+
       console.log('client is connected');
       socket.sendMessage({messageType: 'chat', data: 'Go go go fire in the hole!'});
 
@@ -38,6 +43,11 @@ var connect = function(host, port, cb) {
   });
 }
 
-module.exports = {
-  connect: connect
+var exports = {
+  connect: connect,
+  events: {
+    connected: null
+  }
 }
+
+module.exports = exports;
