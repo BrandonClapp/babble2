@@ -3,6 +3,7 @@
 
   var net = require('net');
   var JsonSocket = require('json-socket');
+  var events = require('./../services/events.js');
 
   var connect = function(host, port, username, password) {
     return new Promise(function(resolve, reject) {
@@ -12,9 +13,7 @@
 
       socket.on('connect', function() {
           resolve();
-          if(exports.events.connected) {
-            exports.events.connected();
-          }
+          events.fire('connected');
       });
 
       socket.on('error', function(err){
@@ -24,10 +23,7 @@
   }
 
   var exports = {
-    connect: connect,
-    events: {
-      connected: null
-    }
+    connect: connect
   }
 
   module.exports = exports;

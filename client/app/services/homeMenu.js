@@ -6,6 +6,7 @@
     var Menu = remote.require('menu');
     var MenuItem = remote.require('menu-item');
     var ipc = require('ipc');
+    var events = require('./../services/events.js');
 
     var menu = null;
 
@@ -29,10 +30,7 @@
             label: 'New Connection',
             accelerator: 'CmdOrCtrl+N',
             click: function() {
-                console.log('New connection clicked.');
-                if(homeMenu.events.newConnectionClick){
-                    homeMenu.events.newConnectionClick();
-                }
+                events.fire('newConnectionClick');
             }
           },
           {
@@ -65,10 +63,7 @@
   }
 
   var homeMenu = {
-    display: display,
-    events: {
-      newConnectionClick: null
-    }
+    display: display
   }
 
   module.exports = homeMenu;
