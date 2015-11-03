@@ -23,6 +23,13 @@
       $scope.message = 'I\'m connected, yo!\n';
       $scope.connected = true;
       $scope.$apply();
+
+      tcp.send('getAllChannelsRequest');
+    });
+
+    events.on('getAllChannelsResponse', function(data){
+      $scope.channels = data;
+      $scope.$apply();
     });
 
     $scope.messages = [];

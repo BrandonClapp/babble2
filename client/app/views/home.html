@@ -28,6 +28,13 @@
         <div ng-repeat="msg in messages">
           {{ msg.user.username + ': ' + msg.data }}
         </div>
+        <hr />
+        <ul ng-repeat="channel in channels">
+          <li>{{channel.name}}</li>
+          <ul ng-repeat="user in channel.users">
+            <li>{{ user.username }}</li>
+          </ul>
+        </ul>
       </div>
     </div>
   </body>
