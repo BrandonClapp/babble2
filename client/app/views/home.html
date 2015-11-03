@@ -30,7 +30,7 @@
         </div>
         <hr />
         <ul ng-repeat="channel in channels">
-          <li>{{channel.name}}</li>
+          <li ng-dblclick="onChannelJoin(channel)">{{channel.name}}</li>
           <ul ng-repeat="user in channel.users">
             <li>{{ user.username }}</li>
           </ul>
