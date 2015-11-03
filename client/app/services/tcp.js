@@ -5,12 +5,14 @@
   var JsonSocket = require('json-socket');
   var events = require('./../services/events.js');
 
-  var netsocket = new net.Socket();
   var socket = new JsonSocket(new net.Socket());
 
   var connect = function(host, port, username, password) {
     return new Promise(function(resolve, reject) {
-
+      disconnect();
+      
+      socket = new JsonSocket(new net.Socket());
+      
       socket.connect(port, host);
 
       socket.on('connect', function() {
@@ -27,6 +29,14 @@
       });
     });
   }
+  
+  var disconnect = function () {
+    if (socket && !socket.isClosed()) {
+      console.log('ending client socket...');
+      socket.end();
+      socket = null;
+    }
+  }
 
   var send = function(messageType, data) {
     socket.sendMessage({ 'messageType': messageType, 'data': data });
@@ -34,6 +44,7 @@
 
   var exports = {
     connect: connect,
+    disconnect: disconnect,
     send: send
   }
 

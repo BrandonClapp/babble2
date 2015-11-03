@@ -31,6 +31,14 @@
       $scope.display.newConnectionOverlay = true;
       $scope.$apply();
     });
+    
+    events.on('disconnectClick', function () {
+      tcp.disconnect();
+      $scope.connected = false;
+      $scope.messages = [];
+      $scope.channels = [];
+      $scope.$apply();
+    });
 
     events.on('connected', function() {
       $scope.message = 'I\'m connected, yo!\n';

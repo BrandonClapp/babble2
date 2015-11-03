@@ -34,7 +34,10 @@
             }
           },
           {
-            label: 'Disconnect'
+            label: 'Disconnect',
+            click: function() {
+                events.fire('disconnectClick');
+            }
           }
         ]
       },
