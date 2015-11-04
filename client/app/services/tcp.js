@@ -5,7 +5,7 @@
   var JsonSocket = require('json-socket');
   var events = require('./../services/events.js');
 
-  var socket = new JsonSocket(new net.Socket());
+  var socket = null;
 
   var connect = function(host, port, username, password) {
     return new Promise(function(resolve, reject) {
@@ -33,6 +33,7 @@
   var disconnect = function () {
     if (socket && !socket.isClosed()) {
       console.log('ending client socket...');
+      socket.sendEndMessage({});
       socket.end();
       socket = null;
     }
