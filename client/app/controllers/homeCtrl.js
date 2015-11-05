@@ -31,7 +31,7 @@
       $scope.display.newConnectionOverlay = true;
       $scope.$apply();
     });
-    
+
     events.on('disconnectClick', function () {
       tcp.disconnect();
       $scope.connected = false;
@@ -74,6 +74,7 @@
     events.on('chat', function(data){
       $scope.messages.push(data);
       $scope.$apply();
+      $('#activities').scrollTop(1000000);
     });
 
   }])

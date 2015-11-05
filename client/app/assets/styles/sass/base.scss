@@ -33,3 +33,49 @@ body {
   margin-right: 40px;
   position: relative;
 }
+
+.channelPanel {
+
+}
+
+.infoPanel {
+
+}
+
+.activityPanel {
+  position: absolute;
+  bottom: 0;
+  height: $app-height / 3;
+
+  #activities {
+    bottom: 30px;
+    height: (($app-height / 3) - 30px) - 20px; // 30 for chat box, 20 for padding
+    overflow: auto;
+    width: $app-width - 20px;
+    padding: 10px;
+  }
+
+  #chatBox {
+    position: relative;
+    bottom: 0;
+    height: 30px;
+    width: $app-width;
+
+    input[type=text] {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: $app-width - 50px;
+      height: 24px; // gets 6px from padding & margin
+    }
+
+    button {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 50px;
+      height: 30px;
+    }
+  }
+
+}

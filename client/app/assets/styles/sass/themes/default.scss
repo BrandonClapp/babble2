@@ -5,11 +5,16 @@ $font-size:     13px;
 $primary-color: #fff;
 $secondary-color: #000;
 $primary-bg-color: #000;
+$secondary-bg-color: #2155aa;
 
 body {
   font: $font-size $font-stack;
   color: $primary-color;
   background: $primary-bg-color;
+}
+
+input, button {
+  font: $font-stack;
 }
 
 .content {
@@ -27,4 +32,30 @@ body {
   color: $secondary-color;
   border:2px solid $secondary-color;
   border-radius: 2px;
+}
+
+.activityPanel {
+
+  form {
+    input, button {
+      font-size: 14px;
+      &:focus {
+        outline: 0;
+      }
+    }
+  }
+
+  #activities {
+    border-top: 2px solid $primary-color;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  #chatBox {
+    button {
+      color: $primary-color;
+      background: $secondary-bg-color;
+      border: none;
+      text-transform: uppercase;
+    }
+  }
 }
