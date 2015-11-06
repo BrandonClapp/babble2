@@ -77,6 +77,23 @@
       $('#activities').scrollTop(1000000);
     });
 
+
+    // https://github.com/daaain/JSSoundRecorder
+    // shim and create AudioContext
+    window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
+    var audioContext = new AudioContext();
+    
+    // shim and start GetUserMedia audio stream
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
+      console.log('No live audio input: ' + e);
+    });
+    
+    function startUserMedia(stream) {
+      console.log('stream...', stream);
+      var input = audioContext.createMediaStreamSource(stream);
+      input.connect(audioContext.destination);
+    }
   }])
 })(
   _,

@@ -12,6 +12,7 @@ app.on('ready', function(){
   mainWindow = new BrowserWindow({
     width: 500,
     height: 600,
+    webaudio: true
     //frame: false
   });
 
