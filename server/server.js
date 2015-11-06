@@ -61,7 +61,11 @@ function handleMessage(user, message) {
 			break;
 		case 'userJoinChannelRequest':
 			handleUserJoinChannelRequestMessage(user, message);
-			break;	
+			break;
+      case 'voice':
+      console.log('voice!');
+      console.log('user', user);
+      console.log('message', message);
 		default:
 			console.log('Unable to find handler for message type: ' + message.messageType);
 			break;
@@ -94,7 +98,7 @@ function broadcastChannel(channelId, message) {
 	if (!channel) {
 		return;
 	}
-	
+
 	_.each(channel.users, function (user) {
 		var client = _.find(clients, {user: {connectionId: user.connectionId}});
 		if (!client) {return;}
@@ -138,23 +142,22 @@ function clientsCount() {
 
 function joinUserToChannel(user, channelId) {
 	var channel = _.find(channels, {id: channelId});
-	if (!channel) { 
+	if (!channel) {
 		console.log('addUserToChannel: unable to find channelId ' + channelId);
-		return; 
+		return;
 	}
-	
+
 	removeUserFromChannel(user);
 	channel.users.push(user);
 	user.channelId = channel.id;
-	
+
 	console.log('current channel information: ');
 	console.log(JSON.stringify(channels, null, 2));
 }
 
 function removeUserFromChannel(user) {
 	_.each(channels, function (channel) {
-		_.remove(channel.users, {connectionId: user.connectionId})		
+		_.remove(channel.users, {connectionId: user.connectionId})
 	});
 	user.channelId = 0;
 }
-
