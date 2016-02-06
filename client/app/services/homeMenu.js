@@ -6,7 +6,7 @@
     var Menu = remote.require('menu');
     var MenuItem = remote.require('menu-item');
     var ipc = require('ipc');
-    var events = require('./../services/events.js');
+    var events = require(__base + 'app/services/events.js');
 
     var menu = null;
 
@@ -69,6 +69,6 @@
     display: display
   }
 
-  module.exports = homeMenu;
+  return module.exports = homeMenu;
 
 })();

@@ -1,8 +1,9 @@
 'use strict'
+global.__base = __dirname + '/';
 
 // Bootstrap Modules
-var config = require('./config.js');
-var host = require('./host/host.js').start();
+var config = require(__base + 'config.js');
+var host = require(__base + 'host/host.js').start();
 
 // Electron Modules
 var app = require('app');
@@ -40,7 +41,7 @@ function initApp() {
       mainWindow.loadUrl('http://localhost:' + config.httpPort);
 
       // maybe initialize this to index menu to stop flickering.
-      mainWindow.setMenu(null);
+      //mainWindow.setMenu(null);
     });
 }
 

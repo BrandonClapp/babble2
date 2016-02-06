@@ -1,56 +1,36 @@
-<!DOCTYPE html>
-<html ng-app="babble" ng-controller="homeCtrl">
-  <head>
-    <meta charset="UTF-8">
-    <title>Babble</title>
-    <link rel="import" href="_styles.html">
-    <script>window.$ = window.jQuery = require('jquery');</script>
-    <script src="./../../node_modules/lodash/index.js"></script>
-    <script src="./../../node_modules/angular/angular.js"></script>
-    <script src="./../../node_modules/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="./../../node_modules/vex-js/js/vex.combined.min.js"></script>
-    <script src="./../../node_modules/angular-ui-layout/src/ui-layout.js"></script>
-    <script>vex.defaultOptions.className = 'vex-theme-wireframe';</script>
-    <script src="./../app.js"></script>
-    <script src="./../controllers/homeCtrl.js"></script>
-    <script src="./../controllers/newConnectionCtrl.js"></script>
-  </head>
-  <body>
-    <div ng-show="display.newConnectionOverlay" class="content-overlay">
-      <div class="newConnection" ng-include="'newConnection.html'"></div>
+<div ng-show="display.newConnectionOverlay" class="content-overlay">
+  <div class="newConnection" ng-include="'newConnection.html'"></div>
+</div>
+<div class="content">
+  <div ng-show="connected">
+
+    <div class="channelPanel">
+      <ul ng-repeat="channel in channels">
+        <li ng-dblclick="onChannelJoin(channel)">{{channel.name}}</li>
+        <ul ng-repeat="user in channel.users">
+          <li>{{ user.username }}</li>
+        </ul>
+      </ul>
     </div>
-    <div class="content">
-      <div ng-show="connected">
 
-        <div class="channelPanel">
-          <ul ng-repeat="channel in channels">
-            <li ng-dblclick="onChannelJoin(channel)">{{channel.name}}</li>
-            <ul ng-repeat="user in channel.users">
-              <li>{{ user.username }}</li>
-            </ul>
-          </ul>
-        </div>
+    <div class="infoPanel">
+      <div>Information about things</div>
+    </div>
 
-        <div class="infoPanel">
-          <div>Information about things</div>
-        </div>
+    <div class="activityPanel">
+      <div id="activities">
+        <ul ng-repeat="msg in messages">
+          <li>{{ msg.user.username + ': ' + msg.data }}</li>
+        </ul>
+      </div>
 
-        <div class="activityPanel">
-          <div id="activities">
-            <ul ng-repeat="msg in messages">
-              <li>{{ msg.user.username + ': ' + msg.data }}</li>
-            </ul>
-          </div>
-
-          <div id="chatBox">
-            <form ng-submit="onChatSend(message)">
-              <input type="text" ng-model="message" />
-              <button type="submit">Send</button>
-            </form>
-          </div>
-        </div>
-
+      <div id="chatBox">
+        <form ng-submit="onChatSend(message)">
+          <input type="text" ng-model="message" />
+          <button type="submit">Send</button>
+        </form>
       </div>
     </div>
-  </body>
-</html>
+
+  </div>
+</div>

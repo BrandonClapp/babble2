@@ -1,9 +1,7 @@
 (function(_, homeMenu, tcp, events) {
   'use strict'
   homeMenu.display();
-
-  //var binaryjs = require('binaryjs');
-
+  
   angular.module('babble').controller('homeCtrl', ['$scope', function($scope) {
 
     // scope declarations

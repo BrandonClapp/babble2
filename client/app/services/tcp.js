@@ -3,16 +3,16 @@
 
   var net = require('net');
   var JsonSocket = require('json-socket');
-  var events = require('./../services/events.js');
+  var events = require(__base + 'app/services/events.js');
 
   var socket = null;
 
   var connect = function(host, port, username, password) {
     return new Promise(function(resolve, reject) {
       disconnect();
-      
+
       socket = new JsonSocket(new net.Socket());
-      
+
       socket.connect(port, host);
 
       socket.on('connect', function() {
@@ -29,7 +29,7 @@
       });
     });
   }
-  
+
   var disconnect = function () {
     if (socket && !socket.isClosed()) {
       console.log('ending client socket...');

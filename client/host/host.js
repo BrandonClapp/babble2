@@ -4,16 +4,15 @@
 
     function startHttp(routes) {
 
+        //app.use(express.static(config.views));
+        app.use(express.static(__base + 'app'));
+        app.use('node_modules', express.static(__base + 'node_modules')); // consider moving front end pieces out into bower.
+
         app.listen(config.httpPort, (req, res) => {
             console.log('listening on port ' + config.httpPort);
         });
 
         registerHttpRoutes(routes);
-
-        // app.get('/', (req, res) => {
-        //     console.log('root invoked.');
-        //     res.send('OK');
-        // });
     }
 
     function registerHttpRoutes(routes) {
@@ -34,4 +33,8 @@
         }
     };
 
-})(require('./../config.js'), require('express'), require('./httpRoutes'));
+})(
+    require(__base + 'config.js'),
+    require('express'),
+    require(__base + '/host/httpRoutes.js')
+  );
