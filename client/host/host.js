@@ -1,26 +1,37 @@
-'use strict'
+(function(config, express, httpRoutes){
+    'use strict'
+    var app = express();
 
-class Host {
+    function startHttp(routes) {
 
-    constructor(express) {
-        this.app = express();
-    }
-
-    start() {
-        this.app.listen(3000, (req, res) => {
-            console.log('listening on 3000.');
+        app.listen(config.httpPort, (req, res) => {
+            console.log('listening on port ' + config.httpPort);
         });
+
+        registerHttpRoutes(routes);
+
+        // app.get('/', (req, res) => {
+        //     console.log('root invoked.');
+        //     res.send('OK');
+        // });
     }
 
-    addRoute(method, path, handler) {
-        this.app[method](path, handler);
+    function registerHttpRoutes(routes) {
+        for(let i = 0; i < routes.length; i++) {
+            let route = routes[i];
+            app[route.method](route.path, route.handler);
+        }
     }
-}
 
-// var express = require('express');
-// var host = new Host(express);
-//
-// host.addRoute('get', '/', (req, res) => {
-//     console.log('handled.');
-// });
-// host.start();
+    function startUdp() {
+        console.log('starting udp.');
+    }
+
+    return module.exports = {
+        start: () => {
+            startHttp(httpRoutes);
+            startUdp();
+        }
+    };
+
+})(require('./../config.js'), require('express'), require('./httpRoutes'));
