@@ -30,6 +30,7 @@ app.on('ready', function(){
   //   newConnectionWindow.loadUrl('file://' + __dirname + '/app/views/newConnection.html');
   // });
 
+  //loadUrl: localhost/home/
   mainWindow.loadUrl('file://' + __dirname + '/app/views/home.html')
   // maybe initialize this to index menu to stop flickering.
   //mainWindow.setMenu(null);

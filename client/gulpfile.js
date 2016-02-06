@@ -21,6 +21,8 @@ gulp.task('clean-styles', function(done) {
     clean(files, done);
 });
 
+gulp.task('default', ['clean-styles']);
+
 function clean(path, done) {
     log('Cleaning: ' + plugins.util.colors.blue(path));
     del(path).then(done());
