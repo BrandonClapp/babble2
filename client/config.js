@@ -1,6 +1,10 @@
+if(!__base) {
+    var __base = __dirname + '/';
+}
+
 module.exports = {
     ext: [
-        __base + 'app/assets/styles/ext'
+        __base  + 'app/assets/styles/ext'
     ],
     sass: [
         __base + 'app/assets/styles/sass/**/*.scss',

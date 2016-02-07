@@ -1,6 +1,7 @@
 .DS_Store
 *.log
 node_modules
+bower_components
 client/node_modules
 client/app/assets/styles/css
 server/node_modules

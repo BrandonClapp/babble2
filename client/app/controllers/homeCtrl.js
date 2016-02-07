@@ -1,7 +1,7 @@
 (function(_, homeMenu, tcp, events) {
   'use strict'
   homeMenu.display();
-  
+
   angular.module('babble').controller('homeCtrl', ['$scope', function($scope) {
 
     // scope declarations

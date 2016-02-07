@@ -4,9 +4,10 @@
 
     function startHttp(routes) {
 
-        //app.use(express.static(config.views));
-        app.use(express.static(__base + 'app'));
-        app.use('node_modules', express.static(__base + 'node_modules')); // consider moving front end pieces out into bower.
+        // app.use(express.static(__base + 'app'));
+        // app.use('/app/views', express.static(__base + 'app/views'));
+        // app.use('/app/assets/styles/css', express.static(__base + 'app/assets/styles/css'));
+        // app.use('/bower_components', express.static(__base + 'bower_components')); // consider moving front end pieces out into bower.
 
         app.listen(config.httpPort, (req, res) => {
             console.log('listening on port ' + config.httpPort);

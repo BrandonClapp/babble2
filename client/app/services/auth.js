@@ -19,4 +19,4 @@
   }
 
   module.exports = service;
-})(require(__base + 'app/services/tcp.js'));
+})(require('./tcp.js'));

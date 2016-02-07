@@ -3,7 +3,7 @@ global.__base = __dirname + '/';
 
 // Bootstrap Modules
 var config = require(__base + 'config.js');
-var host = require(__base + 'host/host.js').start();
+var httpListener = require(__base + 'host/host.js').start();
 
 // Electron Modules
 var app = require('app');
@@ -37,8 +37,8 @@ function initApp() {
         newConnectionWindow.loadUrl('file://' + __dirname + '/app/views/newConnection.html');
       });
 
-      // mainWindow.loadUrl('file://' + __dirname + '/app/views/home.html');
-      mainWindow.loadUrl('http://localhost:' + config.httpPort);
+      mainWindow.loadUrl('file://' + __dirname + '/app/views/_layout.html');
+      //mainWindow.loadUrl('http://localhost:' + config.httpPort);
 
       // maybe initialize this to index menu to stop flickering.
       //mainWindow.setMenu(null);

@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <title>Babble</title>
     <link rel="import" href="_styles.html">
-    <script>window.$ = window.jQuery = require('jquery');</script>
-    <script src="./../../node_modules/lodash/index.js"></script>
-    <script src="./../../node_modules/angular/angular.js"></script>
-    <script src="./../../node_modules/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="./../../node_modules/vex-js/js/vex.combined.min.js"></script>
-    <script src="./../../node_modules/angular-ui-layout/src/ui-layout.js"></script>
-    <script src="./../../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
-    <script>vex.defaultOptions.className = 'vex-theme-wireframe';</script>
+    <!--bower-->
+    <script src="./../../bower_components/jquery/dist/jquery.js"></script>
+    <script src="./../../bower_components/lodash/dist/lodash.js"></script>
+    <script src="./../../bower_components/angular/angular.js"></script>
+    <script src="./../../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!--end bower-->
+
     <script src="./../app.js"></script>
     <script src="./../controllers/homeCtrl.js"></script>
     <script src="./../controllers/newConnectionCtrl.js"></script>
   </head>
-  <body ng-controller="homeCtrl">
+  <body>
       <div>This is working.</div>
       <div ui-view></div>
   </body>
