@@ -1,10 +1,10 @@
-<div ng-controller="homeCtrl" ng-show="display.newConnectionOverlay" class="content-overlay">
+<div ng-show="display.newConnectionOverlay" class="content-overlay">
   <div class="newConnection" ng-include="'newConnection.html'"></div>
 </div>
 <div class="content">
   <div ng-show="connected">
-
     <div class="channelPanel">
+        <a ui-sref="connected">Show Connected State</a>
       <ul ng-repeat="channel in channels">
         <li ng-dblclick="onChannelJoin(channel)">{{channel.name}}</li>
         <ul ng-repeat="user in channel.users">

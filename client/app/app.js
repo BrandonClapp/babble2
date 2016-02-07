@@ -3,9 +3,22 @@
 
   var app = angular.module('babble', ['ui.router']);
 
-  app.config(function($stateProvider) {
+  app.config(function($stateProvider, $urlRouterProvider) {
       console.log('config loaded correctly.', $stateProvider);
-      alert('app.js');
+
+      $stateProvider
+      .state('home', {
+          url: "/",
+          templateUrl: "home.html",
+          controller: 'homeCtrl'
+      })
+      .state('connected', {
+        url: "/connected",
+        templateUrl: "connected.html",
+        controller: 'connectedCtrl'
+    });
+
+      $urlRouterProvider.otherwise("/");
   });
 
 })();
