@@ -1,4 +1,4 @@
-(function(auth) {
+(function(auth, cache) {
     'use strict'
 
     angular.module('babble').controller('newConnectionCtrl', ['$scope', function($scope) {
@@ -17,8 +17,8 @@
 
         $scope.onConnectSubmit = function(form) {
             auth.connect(form.host, form.port, form.username, form.password).then(function() {
-
-                // upon connecting, this needs to be cached somewhere.
+                cache.set('server.host', form.host);
+                cache.set('server.port', form.port);
                 alert('Successfully connected. Message of the day!');
                 close();
             }, function(err) {
@@ -30,5 +30,8 @@
             resetForm();
         }
 
-    }])
-})(require('./../services/auth.js'));
+    }]);
+})(
+    require('./../services/auth.js'),
+    require('./../services/cache.js')
+);
