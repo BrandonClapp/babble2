@@ -37,5 +37,5 @@
 })(
     require(__base + 'config.js'),
     require('express'),
-    require(__base + '/host/httpRoutes.js')
+    require(__base + '/api/httpRoutes.js')
   );

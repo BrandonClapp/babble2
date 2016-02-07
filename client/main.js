@@ -3,7 +3,7 @@ global.__base = __dirname + '/';
 
 // Bootstrap Modules
 var config = require(__base + 'config.js');
-var httpListener = require(__base + 'host/host.js').start();
+var httpListener = require(__base + 'api/host.js').start();
 
 // Electron Modules
 var app = require('app');
@@ -17,7 +17,7 @@ function initApp() {
 
     app.on('ready', function() {
       mainWindow = new BrowserWindow({
-        width: 500,
+        width: 800,
         height: 600,
         webaudio: true
         //frame: false
@@ -28,14 +28,14 @@ function initApp() {
          app.quit();
       });
 
-      ipc.on('newConnectionWindow', function(){
-        newConnectionWindow = new BrowserWindow({
-          width: 450,
-          height: 350,
-        });
-
-        newConnectionWindow.loadUrl('file://' + __dirname + '/app/views/newConnection.html');
-      });
+    //   ipc.on('newConnectionWindow', function(){
+    //     newConnectionWindow = new BrowserWindow({
+    //       width: 800,
+    //       height: 600,
+    //     });
+      //
+    //     newConnectionWindow.loadUrl('file://' + __dirname + '/app/views/newConnection.html');
+    //   });
 
       mainWindow.loadUrl('file://' + __dirname + '/app/views/_layout.html');
       //mainWindow.loadUrl('http://localhost:' + config.httpPort);
