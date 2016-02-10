@@ -23,6 +23,10 @@ gulp.task('clean-styles', function(done) {
 
 gulp.task('default', ['clean-styles']);
 
+function host() {
+    // run 'node ./app_server/host.js'
+}
+
 function clean(path, done) {
     log('Cleaning: ' + plugins.util.colors.blue(path));
     del(path).then(done());

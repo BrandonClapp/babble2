@@ -1,7 +1,3 @@
-if(!__base) {
-    var __base = __dirname + '/';
-}
-
 module.exports = {
     ext: [
         __base  + 'app/assets/styles/ext'
@@ -11,8 +7,5 @@ module.exports = {
         __base + 'app/assets/styles/sass/**/*.sass'
     ],
     css: __base + 'app/assets/styles/css/',
-    views: __base + 'app/views/',
-
-    httpPort: 9001,
-    udpPort: 1234
+    views: __base + 'app/views/'
 }

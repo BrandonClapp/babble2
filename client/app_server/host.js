@@ -4,10 +4,10 @@
 
     function startHttp(routes) {
 
-        // app.use(express.static(__base + 'app'));
-        // app.use('/app/views', express.static(__base + 'app/views'));
-        // app.use('/app/assets/styles/css', express.static(__base + 'app/assets/styles/css'));
-        // app.use('/bower_components', express.static(__base + 'bower_components')); // consider moving front end pieces out into bower.
+        app.use(express.static(__base + 'app'));
+        app.use('/', express.static(__base + 'app/views'));
+        app.use('/styles', express.static(__base + 'app/assets/styles/css'));
+        app.use('/external', express.static(__base + 'bower_components'));
 
         app.listen(config.httpPort, (req, res) => {
             console.log('listening on port ' + config.httpPort);
@@ -23,19 +23,14 @@
         }
     }
 
-    function startUdp() {
-        console.log('starting udp.');
-    }
-
     return module.exports = {
         start: () => {
             startHttp(httpRoutes);
-            startUdp();
         }
     };
 
 })(
-    require(__base + 'config.js'),
+    require('./config.js'), // maybe need better paths
     require('express'),
-    require(__base + '/api/httpRoutes.js')
+    require('./httpRoutes.js')
   );
