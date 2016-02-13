@@ -3,30 +3,43 @@
     angular.module('babble').controller('home.controller', ['$scope', '$state', '$ocLazyLoad', 'socket', 'cache',
     function($scope, $state, $ocLazyLoad, socket, cache) {
 
+        // todo: check to see if the user has a cached jwt token
+        //
+
         $scope.connect = function(host, port) {
-            console.log('lazy loading socket.io');
-            console.log('loaded', cache.ioLoaded);
-
-            if(!cache.ioLoaded) {
-                $ocLazyLoad.load('http://' + host + ':' + port + '/socket.io/socket.io.js');
-
-                $scope.$on('ocLazyLoad.fileLoaded', function(e, file) {
-                    console.log('module loaded', file);
-                    scriptLoaded(host, port);
-                });
-            } else {
-                console.log('script already been loaded.');
-                checkSocketConnection();
-            }
+            loadScript(host, port);
         }
+
+        if(cache.getLastConnectedServer()) {
+            console.log('CACHED LAST SERVER EXISTS');
+            var lastConnectedServer = cache.getLastConnectedServer();
+            $scope.connect(lastConnectedServer.host, lastConnectedServer.port);
+        } else {
+            console.log('NO LAST CONNECTED SERVER');
+        }
+
+        function loadScript(host, port) {
+            $ocLazyLoad.load(getHostUrl(host, port) + '/socket.io/socket.io.js');
+        }
+
+        $scope.$on('ocLazyLoad.fileLoaded', function(e, file) {
+            //console.log('module loaded', file);
+            if($scope.host && $scope.port) {
+                scriptLoaded($scope.host, $scope.port);
+            } else if (cache.getLastConnectedServer()) {
+                var lastConnected = cache.getLastConnectedServer();
+                scriptLoaded(lastConnected.host, lastConnected.port);
+            }
+        });
 
         function checkSocketConnection() {
             if(socket.connected()) {
-                console.log('CONNECTED');
                 $state.go('connected');
-            } else {
-                console.log('NOT CONNECTED.')
             }
+        }
+
+        function getHostUrl(host, port) {
+            return 'http://' + host + ':' + port;
         }
 
         function scriptLoaded(host, port) {
@@ -39,7 +52,6 @@
 
             socket.forward('error', $scope);
             $scope.$on('socket:error', function(evt, error) {
-                // console.log('error happened', error);
                 if (error.type == "UnauthorizedError" || error.code == "invalid_token") {
                     // redirect user to login page perhaps?
                     console.log("User's token is invalid (or has expired)");
@@ -48,6 +60,7 @@
             });
 
             socket.on('connect', function() {
+                cache.setLastConnectedServer({ host: host, port, port });
                 $state.go('connected');
             });
 
@@ -55,6 +68,5 @@
                 console.log('disconnected');
             });
         }
-
     }]);
 })();

@@ -1,5 +1,7 @@
 (() => {
     'use strict'
+
+    // angular wrapper around socket.io
     angular.module('babble').factory('socket', ['$timeout', '$rootScope', function($timeout, $rootScope) {
         var socket = null;
         var prefix = 'socket:';
@@ -15,7 +17,10 @@
         };
 
         function on(evt, callback) {
-            socket.on(evt, callback.__ng = asyncAngularify(socket, callback));
+            if(socket) {
+                socket.on(evt, callback.__ng = asyncAngularify(socket, callback));    
+            }
+
         }
 
         function emit(evt, data, callback) {
@@ -36,6 +41,8 @@
           }
 
         function forward (events, scope) {
+            if(!socket) return;
+
             if (events instanceof Array === false) {
               events = [events];
             }
@@ -54,8 +61,6 @@
               socket.on(eventName, forwardBroadcast);
             });
           }
-
-
 
         function load(io, config) {
             // todo clean this up

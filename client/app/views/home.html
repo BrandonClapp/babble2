@@ -1,12 +1,17 @@
 <div>
-    I used to sit by the radio
-</div>
-<div>
-    waiting for my favorite songs
-</div>
-
-<div>
-    <a ng-click="connect('localhost', '9000')">Connect with hard coded values</a>
+    <form ng-submit="connect(host, port)">
+        <p>
+            <label>Host</label>
+            <input type="text" ng-model="host" />
+        </p>
+        <p>
+            <label>Port</label>
+            <input type="text" ng-model="port" />
+        </p>
+        <p>
+            <button type="submit">Connect</button>
+        </p>
+    </form>
 </div>
 
 <div>

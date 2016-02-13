@@ -2,14 +2,28 @@
     'use strict'
 
     // represents the base controller for all connected states
-    angular.module('babble').controller('connected.controller', ['$scope', '$state', 'socket', '$ocLazyLoad', function($scope, $state, socket, $ocLazyLoad) {
+    angular.module('babble').controller('connected.controller', ['$scope', '$state', 'socket', '$ocLazyLoad', 'cache',
+    function($scope, $state, socket, $ocLazyLoad, cache) {
 
-        console.log('lazy loading socket.io');
-        $ocLazyLoad.load('http://localhost:9000/socket.io/socket.io.js');
-        console.log('lazy loaded socket.io', io);
+        if(!socket.connected()) {
+            $state.go('home');
+        }
         // connect the socket if not already connected.
-        socket.load(io); // io exposed from lazy loaded socket.io script.
+         // io exposed from lazy loaded socket.io script.
 
+
+         $scope.disconnect = function() {
+             socket.emit('forceDisconnect');
+         }
+
+         socket.on('disconnect', function() {
+             console.log('client disconnected');
+         });
+
+         socket.on('manual-dc', function() {
+             console.log('manual-dc');
+             cache.setLastConnectedServer();
+         });
 
         // ensure that the socket event handler only gets registered once on (forward/back nagivation).
         socket.forward('news', $scope);
@@ -19,14 +33,7 @@
           socket.emit('my other event', { my: 'data' });
         });
 
-        socket.forward('error', $scope);
-        $scope.$on('socket:error', function(evt, error) {
-            // console.log('error happened', error);
-            if (error.type == "UnauthorizedError" || error.code == "invalid_token") {
-              // redirect user to login page perhaps?
-              console.log("User's token is invalid (or has expired)");
-            }
-        });
+
 
     }]);
 })();

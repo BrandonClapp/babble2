@@ -21,7 +21,7 @@
             console.log('emitting ' + counter + ' to ' + conSock.id);
             conSock.emit('news', counter);
         });
-    }, 1000);
+    }, 200);
     //////////
 
     // io.use(socketioJwt.authorize({
@@ -46,6 +46,11 @@
           _.remove(connectedSockets, (conSock) => {
               return conSock.id === socket.id;
           });
+      });
+
+      socket.on('forceDisconnect', function() {
+         socket.emit('manual-dc');
+         socket.disconnect();
       });
     });
 
