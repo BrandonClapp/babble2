@@ -5,39 +5,6 @@
     waiting for my favorite songs
 </div>
 
-<!-- <div ng-show="display.newConnectionOverlay" class="content-overlay">
-  <div class="newConnection" ng-include="'newConnection.html'"></div>
+<div>
+    <a ui-sref="connected">Connect</a>
 </div>
-<div class="content">
-  <div ng-show="connected">
-    <div class="channelPanel">
-        <a ui-sref="connected">Show Connected State</a>
-      <ul ng-repeat="channel in channels">
-        <li ng-dblclick="onChannelJoin(channel)">{{channel.name}}</li>
-        <ul ng-repeat="user in channel.users">
-          <li>{{ user.username }}</li>
-        </ul>
-      </ul>
-    </div>
-
-    <div class="infoPanel">
-      <div>Information about things</div>
-    </div>
-
-    <div class="activityPanel">
-      <div id="activities">
-        <ul ng-repeat="msg in messages">
-          <li>{{ msg.user.username + ': ' + msg.data }}</li>
-        </ul>
-      </div>
-
-      <div id="chatBox">
-        <form ng-submit="onChatSend(message)">
-          <input type="text" ng-model="message" />
-          <button type="submit">Send</button>
-        </form>
-      </div>
-    </div>
-
-  </div>
-</div> -->

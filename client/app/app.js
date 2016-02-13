@@ -1,7 +1,9 @@
 (function() {
   'use strict'
 
-  var app = angular.module('babble', ['ui.router', 'btford.socket-io']);
+  var app = angular.module('babble', ['ui.router']);
+
+
 
   app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -11,8 +13,12 @@
           templateUrl: "home.html",
           controller: 'home.controller'
       })
+      .state('connected', {
+          url: "/connected",
+          templateUrl: "connected.html",
+          controller: 'connected.controller'
+      })
 
       $urlRouterProvider.otherwise("/");
   });
-
 })();
