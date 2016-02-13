@@ -10,7 +10,6 @@
         socket.on('news', function (data) {
           console.log(data);
           $scope.news = data.toString();
-          $scope.$apply();
           socket.emit('my other event', { my: 'data' });
         });
     }]);
