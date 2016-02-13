@@ -4,8 +4,8 @@
   "description": "VoIP Client/Server",
   "main": "server.js",
   "dependencies": {
-    "json-socket": "*",
-    "node-uuid": "*",
-    "lodash-node": "*"
+    "express": "^4.13.4",
+    "lodash-node": "*",
+    "socket.io": "^1.4.5"
   }
 }
