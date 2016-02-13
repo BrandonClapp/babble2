@@ -67,6 +67,7 @@
                     // redirect user to login page perhaps?
                     console.log("User's token is invalid (or has expired)");
                     $scope.error = "User's token is invalid (or has expired)";
+                    $scope.showForm = true;
                 }
             });
 

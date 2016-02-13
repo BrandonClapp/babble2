@@ -8,6 +8,9 @@
 
     server.listen(9000);
 
+    // todo: add logic to disconnect clients after a period of inactivity.
+    // todo: add caching for things that should be persisted.
+
     // app.get('/', function (req, res) {
     //   res.sendfile(__dirname + '/index.html');
     // });
@@ -18,16 +21,16 @@
     setInterval(() => {
         counter++;
         connectedSockets.forEach((conSock) => {
-            console.log('emitting ' + counter + ' to ' + conSock.id);
+            //console.log('emitting ' + counter + ' to ' + conSock.id);
             conSock.emit('news', counter);
         });
     }, 200);
     //////////
 
-    // io.use(socketioJwt.authorize({
-    //   secret: 'your secret or public key',
-    //   handshake: true
-    // }));
+    io.use(socketioJwt.authorize({
+      secret: 'your secret or public key',
+      handshake: true
+    }));
 
     io.on('connection', function (socket) {
         console.log('User connected.');
@@ -37,8 +40,9 @@
         console.log(time);
         socket.emit('news', time);
 
-      socket.on('my other event', function (data) {
-        console.log(data);
+      socket.on('chatMsg', function (data) {
+          console.log('chat message emitting data');
+        io.sockets.emit('chatMsg', data);
       });
 
       socket.on('disconnect', function () {

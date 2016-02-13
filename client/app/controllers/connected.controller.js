@@ -31,10 +31,18 @@
         $scope.$on('socket:news', function (evt, data) {
           console.log('controller event got fired.');
           $scope.news = data;
-          socket.emit('my other event', { my: 'data' });
+          //socket.emit('my other event', { my: 'data' });
         });
 
+        $scope.chatMessages = [];
+        socket.forward('chatMsg', $scope);
+        $scope.$on('socket:chatMsg', function(evt, msg) {
+            $scope.chatMessages.push(msg);
+        });
 
+        $scope.sendMessage = function(msg) {
+            socket.emit('chatMsg', msg);
+        }
 
     }]);
 })();
