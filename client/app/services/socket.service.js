@@ -54,16 +54,37 @@
             });
           }
 
+
+
         function load() {
-            var sock = socket || io.connect('http://localhost:9000');
-            socket = sock;
+
+            // if there is a socket
+            if(socket) {
+                // see if it's connected
+                console.log('there is a socket')
+                if(!socket.connected) {
+                    // if not, connect it.
+                    console.log('it is not connected, attempting to connect');
+                    socket = io.connect('http://localhost:9000');
+                } else {
+                    // do nothing
+                    console.log('it is already connected, returning');
+                    return;
+                }
+
+            } else {
+                // there is not a socket
+                console.log('there is not a socket, attempting to connect');
+                socket = io.connect('http://localhost:9000')
+            }
         }
 
         return {
             on: on,
             emit: emit,
             load: load,
-            forward: forward
+            forward: forward,
+            //connected: socket.connected
         }
     }]);
 })(io);
