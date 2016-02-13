@@ -17,10 +17,10 @@
     var counter = 0;
     setInterval(() => {
         counter++;
-        for(var i = 0; i < connectedSockets.length; i++) {
-            console.log('emitting ' + counter + ' to ' + i);
-            connectedSockets[i].emit('news', counter);
-        }
+        connectedSockets.forEach((conSock) => {
+            console.log('emitting ' + counter + ' to ' + conSock.id);
+            conSock.emit('news', counter);
+        });
     }, 1000);
     //////////
 

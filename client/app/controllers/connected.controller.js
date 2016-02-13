@@ -2,10 +2,13 @@
     'use strict'
 
     // represents the base controller for all connected states
-    angular.module('babble').controller('connected.controller', ['$scope', '$state', 'socket', function($scope, $state, socket) {
+    angular.module('babble').controller('connected.controller', ['$scope', '$state', 'socket', '$ocLazyLoad', function($scope, $state, socket, $ocLazyLoad) {
 
+        console.log('lazy loading socket.io');
+        $ocLazyLoad.load('http://localhost:9000/socket.io/socket.io.js');
+        console.log('lazy loaded socket.io', io);
         // connect the socket if not already connected.
-        socket.load(); 
+        socket.load(io); // io exposed from lazy loaded socket.io script.
 
 
         // ensure that the socket event handler only gets registered once on (forward/back nagivation).

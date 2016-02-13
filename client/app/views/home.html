@@ -6,5 +6,9 @@
 </div>
 
 <div>
-    <a ui-sref="connected">Connect</a>
+    <a ng-click="connect('localhost', '9000')">Connect with hard coded values</a>
+</div>
+
+<div>
+    {{error}}
 </div>

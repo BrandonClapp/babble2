@@ -1,8 +1,9 @@
-((io) => {
+(() => {
     'use strict'
     angular.module('babble').factory('socket', ['$timeout', '$rootScope', function($timeout, $rootScope) {
         var socket = null;
         var prefix = 'socket:';
+        var dataHost = 'http://localhost:9000/'
 
         var asyncAngularify = function(socket, callback) {
             return callback ? function() {
@@ -56,8 +57,8 @@
 
 
 
-        function load() {
-
+        function load(io, config) {
+            // todo clean this up
             // if there is a socket
             if(socket) {
                 // see if it's connected
@@ -65,7 +66,7 @@
                 if(!socket.connected) {
                     // if not, connect it.
                     console.log('it is not connected, attempting to connect');
-                    socket = io.connect('http://localhost:9000');
+                    socket = io.connect('http://' + config.host + ':' + config.port);
                 } else {
                     // do nothing
                     console.log('it is already connected, returning');
@@ -75,8 +76,12 @@
             } else {
                 // there is not a socket
                 console.log('there is not a socket, attempting to connect');
-                socket = io.connect('http://localhost:9000')
+                socket = io.connect('http://' + config.host + ':' + config.port);
             }
+        }
+
+        function checkConnection() {
+            return socket ? socket.connected : false;
         }
 
         return {
@@ -84,7 +89,7 @@
             emit: emit,
             load: load,
             forward: forward,
-            //connected: socket.connected
+            connected: checkConnection
         }
     }]);
-})(io);
+})();
