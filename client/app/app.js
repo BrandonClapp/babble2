@@ -1,7 +1,7 @@
 (function() {
   'use strict'
 
-  var app = angular.module('babble', ['ui.router']);
+  var app = angular.module('babble', ['ui.router', 'btford.socket-io']);
 
   app.config(function($stateProvider, $urlRouterProvider) {
 
