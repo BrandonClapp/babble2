@@ -23,6 +23,7 @@
          socket.on('manual-dc', function() {
              console.log('manual-dc');
              cache.setLastConnectedServer();
+             $state.go('home');
          });
 
         // ensure that the socket event handler only gets registered once on (forward/back nagivation).

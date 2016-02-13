@@ -3,11 +3,18 @@
     angular.module('babble').controller('home.controller', ['$scope', '$state', '$ocLazyLoad', 'socket', 'cache',
     function($scope, $state, $ocLazyLoad, socket, cache) {
 
-        // todo: check to see if the user has a cached jwt token
-        //
+        // todo: see if they have a jwt token
+        // if they do and its valid, check claims for server
+        // instead of using "lastConnectedServer"
+
+        $scope.showForm = false;
 
         $scope.connect = function(host, port) {
-            loadScript(host, port);
+            if(!cache.ioLoaded) {
+                loadScript(host, port);
+            } else {
+                registerEvents(host, port);
+            }
         }
 
         if(cache.getLastConnectedServer()) {
@@ -16,19 +23,20 @@
             $scope.connect(lastConnectedServer.host, lastConnectedServer.port);
         } else {
             console.log('NO LAST CONNECTED SERVER');
+            $scope.showForm = true;
         }
 
         function loadScript(host, port) {
+            // console.log('loading the socket.io script');
             $ocLazyLoad.load(getHostUrl(host, port) + '/socket.io/socket.io.js');
         }
 
         $scope.$on('ocLazyLoad.fileLoaded', function(e, file) {
-            //console.log('module loaded', file);
             if($scope.host && $scope.port) {
-                scriptLoaded($scope.host, $scope.port);
+                scriptLoaded($scope.host, $scope.port, registerEvents);
             } else if (cache.getLastConnectedServer()) {
                 var lastConnected = cache.getLastConnectedServer();
-                scriptLoaded(lastConnected.host, lastConnected.port);
+                scriptLoaded(lastConnected.host, lastConnected.port, registerEvents);
             }
         });
 
@@ -42,9 +50,12 @@
             return 'http://' + host + ':' + port;
         }
 
-        function scriptLoaded(host, port) {
+        function scriptLoaded(host, port, cb) {
             cache.ioLoaded = true;
+            cb(host, port);
+        }
 
+        function registerEvents(host, port) {
             socket.load(io, { // io is lazy loaded.
                 host: host,
                 port: port
