@@ -1,5 +1,4 @@
 'use strict'
-var json = require('jsonwebtoken');
 
 module.exports =
 [
