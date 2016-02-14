@@ -3,7 +3,7 @@
     angular.module('babble').factory('cache', [function() {
 
         function setLastConnectedServer(lastConnectedServer) {
-            if(lastConnectedServer) {
+            if (lastConnectedServer) {
                 console.log('setting lastConnectedServer to an object');
                 localStorage.setItem('lastConnectedServer', JSON.stringify(lastConnectedServer));
             } else {
@@ -15,7 +15,7 @@
         function getLastConnectedServer() {
             var item = localStorage.getItem('lastConnectedServer');
             console.log('item', item);
-            if(item) {
+            if (item) {
                 return JSON.parse(item);
             }
 
@@ -24,7 +24,7 @@
 
         function getToken() {
             var item = localStorage.getItem('token');
-            if(item) {
+            if (item) {
                 return JSON.parse(item);
             }
 
@@ -32,7 +32,7 @@
         }
 
         function setToken(token) {
-            if(token) {
+            if (token) {
                 localStorage.setItem('token', JSON.stringify(token));
             } else {
                 localStorage.setItem('token', '');

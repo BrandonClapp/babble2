@@ -1,4 +1,4 @@
-(function(config, express, httpRoutes){
+(function(config, express, httpRoutes) {
     'use strict'
     var app = express();
 
@@ -17,7 +17,7 @@
     }
 
     function registerHttpRoutes(routes) {
-        for(let i = 0; i < routes.length; i++) {
+        for (let i = 0; i < routes.length; i++) {
             let route = routes[i];
             app[route.method](route.path, route.handler);
         }
@@ -33,4 +33,4 @@
     require('./config.js'), // maybe need better paths
     require('express'),
     require('./httpRoutes.js')
-  );
+);

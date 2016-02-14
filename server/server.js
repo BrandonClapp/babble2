@@ -1,12 +1,12 @@
 (() => {
     'use strict'
-    let app =           require('express')();
-    let server =        require('http').Server(app);
-    let io =            require('socket.io')(server);
-    let socketioJwt =   require('socketio-jwt');
-    let _ =             require('lodash-node');
-    let tokenIssuer =   require('./tokenIssuer.js');
-    let secret =        require('./secret.js')();
+    let app = require('express')();
+    let server = require('http').Server(app);
+    let io = require('socket.io')(server);
+    let socketioJwt = require('socketio-jwt');
+    let _ = require('lodash-node');
+    let tokenIssuer = require('./tokenIssuer.js');
+    let secret = require('./secret.js')();
 
     server.listen(9000);
 
@@ -15,9 +15,9 @@
 
     // enable CORS
     app.use(function(req, res, next) {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-      next();
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
     });
 
     tokenIssuer.expose(app);
@@ -35,11 +35,11 @@
     //////////
 
     io.use(socketioJwt.authorize({
-      secret: secret,
-      handshake: true
+        secret: secret,
+        handshake: true
     }));
 
-    io.on('connection', function (socket) {
+    io.on('connection', function(socket) {
         console.log('User connected.');
         connectedSockets.push(socket);
 
@@ -47,23 +47,22 @@
         console.log(time);
         socket.emit('news', time);
 
-      socket.on('chatMsg', function (data) {
-          console.log('chat message emitting data');
-        io.sockets.emit('chatMsg', data);
-      });
+        socket.on('chatMsg', function(data) {
+            console.log('chat message emitting data');
+            io.sockets.emit('chatMsg', data);
+        });
 
-      socket.on('disconnect', function () {
-          console.log('Socket disconnected: ' + socket.id);
-          _.remove(connectedSockets, (conSock) => {
-              return conSock.id === socket.id;
-          });
-      });
+        socket.on('disconnect', function() {
+            console.log('Socket disconnected: ' + socket.id);
+            _.remove(connectedSockets, (conSock) => {
+                return conSock.id === socket.id;
+            });
+        });
 
-      socket.on('forceDisconnect', function() {
-         socket.emit('manual-dc');
-         socket.disconnect();
-      });
+        socket.on('forceDisconnect', function() {
+            socket.emit('manual-dc');
+            socket.disconnect();
+        });
     });
-
-
+    
 })();

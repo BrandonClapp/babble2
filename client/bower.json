@@ -1,26 +1,26 @@
 {
-  "name": "babbletron",
-  "description": "VoIP Client/Server",
-  "main": "main.js",
-  "authors": [
-    "Brandon Clapp <clapp09@gmail.com>"
-  ],
-  "license": "MIT",
-  "homepage": "https://github.com/BrandonClapp/babbletron",
-  "moduleType": [],
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "angular-socket-io": "^0.7.0",
-    "angular": "^1.5.0",
-    "angular-ui-router": "^0.2.18",
-    "jquery": "^2.2.0",
-    "lodash": "^4.3.0",
-    "oclazyload": "^1.0.9"
-  }
+    "name": "babbletron",
+    "description": "VoIP Client/Server",
+    "main": "main.js",
+    "authors": [
+        "Brandon Clapp <clapp09@gmail.com>"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/BrandonClapp/babbletron",
+    "moduleType": [],
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular-socket-io": "^0.7.0",
+        "angular": "^1.5.0",
+        "angular-ui-router": "^0.2.18",
+        "jquery": "^2.2.0",
+        "lodash": "^4.3.0",
+        "oclazyload": "^1.0.9"
+    }
 }

@@ -16,7 +16,7 @@
         };
 
         function on(evt, callback) {
-            if(socket) {
+            if (socket) {
                 socket.on(evt, callback.__ng = asyncAngularify(socket, callback));
             }
 
@@ -32,46 +32,46 @@
             return socket.emit.apply(socket, arguments);
         }
 
-        function removeListener (ev, fn) {
+        function removeListener(ev, fn) {
             if (fn && fn.__ng) {
-              arguments[1] = fn.__ng;
+                arguments[1] = fn.__ng;
             }
             return socket.removeListener.apply(socket, arguments);
-          }
+        }
 
-        function forward (events, scope) {
-            if(!socket) return;
+        function forward(events, scope) {
+            if (!socket) return;
 
             if (events instanceof Array === false) {
-              events = [events];
+                events = [events];
             }
             if (!scope) {
-              scope = defaultScope;
+                scope = defaultScope;
             }
-            events.forEach(function (eventName) {
-              var prefixedEvent = prefix + eventName;
-              var forwardBroadcast = asyncAngularify(socket, function () {
-                Array.prototype.unshift.call(arguments, prefixedEvent);
-                scope.$broadcast.apply(scope, arguments);
-              });
-              scope.$on('$destroy', function () {
-                socket.removeListener(eventName, forwardBroadcast);
-              });
-              socket.on(eventName, forwardBroadcast);
+            events.forEach(function(eventName) {
+                var prefixedEvent = prefix + eventName;
+                var forwardBroadcast = asyncAngularify(socket, function() {
+                    Array.prototype.unshift.call(arguments, prefixedEvent);
+                    scope.$broadcast.apply(scope, arguments);
+                });
+                scope.$on('$destroy', function() {
+                    socket.removeListener(eventName, forwardBroadcast);
+                });
+                socket.on(eventName, forwardBroadcast);
             });
-          }
+        }
 
         function load(io, config) {
             // todo clean this up
             // if there is a socket
-            if(socket) {
+            if (socket) {
                 // see if it's connected
                 console.log('there is a socket')
-                if(!socket.connected) {
+                if (!socket.connected) {
                     // if not, connect it.
                     console.log('it is not connected, attempting to connect');
                     socket = io.connect('http://' + config.host + ':' + config.port, {
-                      'query': 'token=' + config.token
+                        'query': 'token=' + config.token
                     });
                 } else {
                     // do nothing
@@ -83,7 +83,7 @@
                 // there is not a socket
                 console.log('there is not a socket, attempting to connect');
                 socket = io.connect('http://' + config.host + ':' + config.port, {
-                  'query': 'token=' + config.token
+                    'query': 'token=' + config.token
                 });
             }
         }

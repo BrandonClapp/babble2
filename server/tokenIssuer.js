@@ -16,10 +16,14 @@
             let sentToken = req.body.token;
             let tokenValid = false;
 
-            console.log({ usrname: username, password: password, sentToken: sentToken });
+            console.log({
+                usrname: username,
+                password: password,
+                sentToken: sentToken
+            });
 
             try {
-                if(sentToken) {
+                if (sentToken) {
                     let decoded = jwt.verify(sentToken, secret);
                     tokenValid = true;
                 }
@@ -46,4 +50,8 @@
         expose: expose
     }
 
-})(require('body-parser').json(), require('jsonwebtoken'), require('./secret')());
+})(
+    require('body-parser').json(),
+    require('jsonwebtoken'),
+    require('./secret')()
+);

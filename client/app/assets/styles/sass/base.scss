@@ -1,81 +1,68 @@
 @import 'reset';
 @import 'variables';
-
-$font-stack:    Helvetica, sans-serif;
-$font-size:     13px;
+$font-stack: Helvetica, sans-serif;
+$font-size: 13px;
 $primary-color: #333;
 $primary-bg-color: #296ad4;
-
 body {
-  font: $font-size $font-stack;
-  color: $primary-color;
-  background: $primary-bg-color;
-  overflow: hidden;
+    font: $font-size $font-stack;
+    color: $primary-color;
+    background: $primary-bg-color;
+    overflow: hidden;
 }
-
 .content {
-  height: $app-height;
-  width: $app-width;
+    height: $app-height;
+    width: $app-width;
 }
-
 .content-overlay {
-  position: absolute;
-  height: $app-height;
-  width: $app-width;
+    position: absolute;
+    height: $app-height;
+    width: $app-width;
 }
-
 .newConnection {
-  height: $app-height / 3;
-  width: $app-width - 80px;
-  margin-top: 100px;
-  margin-bottom: $app-height / 4;
-  margin-left: 40px;
-  margin-right: 40px;
-  position: relative;
+    height: $app-height / 3;
+    width: $app-width - 80px;
+    margin-top: 100px;
+    margin-bottom: $app-height / 4;
+    margin-left: 40px;
+    margin-right: 40px;
+    position: relative;
 }
-
 .channelPanel {
 
 }
-
 .infoPanel {
 
 }
-
 .activityPanel {
-  position: absolute;
-  bottom: 0;
-  height: $app-height / 3;
-
-  #activities {
-    bottom: 30px;
-    height: (($app-height / 3) - 30px) - 20px; // 30 for chat box, 20 for padding
-    overflow: auto;
-    width: $app-width - 20px;
-    padding: 10px;
-  }
-
-  #chatBox {
-    position: relative;
+    position: absolute;
     bottom: 0;
-    height: 30px;
-    width: $app-width;
-
-    input[type=text] {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: $app-width - 50px;
-      height: 24px; // gets 6px from padding & margin
+    height: $app-height / 3;
+    #activities {
+        bottom: 30px;
+        height: (($app-height / 3) - 30px) - 20px; // 30 for chat box, 20 for padding
+        overflow: auto;
+        width: $app-width - 20px;
+        padding: 10px;
     }
-
-    button {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      width: 50px;
-      height: 30px;
+    #chatBox {
+        position: relative;
+        bottom: 0;
+        height: 30px;
+        width: $app-width;
+        input[type=text] {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: $app-width - 50px;
+            height: 24px; // gets 6px from padding & margin
+        }
+        button {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 50px;
+            height: 30px;
+        }
     }
-  }
-
 }

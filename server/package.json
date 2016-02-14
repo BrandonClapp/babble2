@@ -1,14 +1,14 @@
 {
-  "name": "babbletron-server",
-  "version": "0.1.0",
-  "description": "VoIP Client/Server",
-  "main": "server.js",
-  "dependencies": {
-    "body-parser": "^1.15.0",
-    "express": "^4.13.4",
-    "jsonwebtoken": "^5.5.4",
-    "lodash-node": "*",
-    "socket.io": "^1.4.5",
-    "socketio-jwt": "^4.3.4"
-  }
+    "name": "babbletron-server",
+    "version": "0.1.0",
+    "description": "VoIP Client/Server",
+    "main": "server.js",
+    "dependencies": {
+        "body-parser": "^1.15.0",
+        "express": "^4.13.4",
+        "jsonwebtoken": "^5.5.4",
+        "lodash-node": "*",
+        "socket.io": "^1.4.5",
+        "socketio-jwt": "^4.3.4"
+    }
 }

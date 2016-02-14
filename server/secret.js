@@ -1,5 +1,6 @@
 (() => {
     'use strict'
+
     function getSecret() {
         return 'MYSUPERSECRETCODE';
     }

@@ -1,24 +1,24 @@
 {
-  "name": "babbletron",
-  "version": "0.1.0",
-  "description": "VoIP Client/Server",
-  "main": "main.js",
-  "scripts": {
-    "start": "node main.js"
-  },
-  "devDependencies": {
-    "del": "^2.0.2",
-    "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-load-plugins": "^1.0.0",
-    "gulp-sass": "^2.1.0",
-    "gulp-util": "^3.0.7"
-  },
-  "dependencies": {
-    "angular": "^1.4.7",
-    "angular-ui-router": "^0.2.17",
-    "body-parser": "^1.15.0",
-    "express": "^4.13.4",
-    "jsonwebtoken": "^5.5.4"
-  }
+    "name": "babbletron",
+    "version": "0.1.0",
+    "description": "VoIP Client/Server",
+    "main": "main.js",
+    "scripts": {
+        "start": "node main.js"
+    },
+    "devDependencies": {
+        "del": "^2.0.2",
+        "gulp": "^3.9.0",
+        "gulp-autoprefixer": "^3.1.0",
+        "gulp-load-plugins": "^1.0.0",
+        "gulp-sass": "^2.1.0",
+        "gulp-util": "^3.0.7"
+    },
+    "dependencies": {
+        "angular": "^1.4.7",
+        "angular-ui-router": "^0.2.17",
+        "body-parser": "^1.15.0",
+        "express": "^4.13.4",
+        "jsonwebtoken": "^5.5.4"
+    }
 }

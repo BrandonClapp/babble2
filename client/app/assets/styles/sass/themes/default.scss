@@ -1,61 +1,54 @@
 @import './../variables';
-
-$font-stack:    Helvetica, sans-serif;
-$font-size:     13px;
+$font-stack: Helvetica, sans-serif;
+$font-size: 13px;
 $primary-color: #fff;
 $secondary-color: #000;
 $primary-bg-color: #000;
 $secondary-bg-color: #2155aa;
-
 body {
-  font: $font-size $font-stack;
-  color: $primary-color;
-  background: $primary-bg-color;
+    font: $font-size $font-stack;
+    color: $primary-color;
+    background: $primary-bg-color;
 }
-
-input, button {
-  font: $font-stack;
+input,
+button {
+    font: $font-stack;
 }
-
 .content {
-  // background: url('./../../../images/main.jpeg');
-  // background-size: cover;
-  // background-position: bottom center;
-}
 
+    // background: url('./../../../images/main.jpeg');
+    // background-size: cover;
+    // background-position: bottom center;
+}
 .content-overlay {
-  background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.6);
 }
-
 .newConnection {
-  background: rgba(255, 255, 255, 1);
-  color: $secondary-color;
-  border:2px solid $secondary-color;
-  border-radius: 2px;
+    background: rgba(255, 255, 255, 1);
+    color: $secondary-color;
+    border: 2px solid $secondary-color;
+    border-radius: 2px;
 }
-
 .activityPanel {
-
-  form {
-    input, button {
-      font-size: 14px;
-      &:focus {
-        outline: 0;
-      }
+    form {
+        input,
+        button {
+            font-size: 14px;
+            &:focus {
+                outline: 0;
+            }
+        }
     }
-  }
-
-  #activities {
-    border-top: 2px solid $primary-color;
-    background: rgba(0, 0, 0, 0.5);
-  }
-
-  #chatBox {
-    button {
-      color: $primary-color;
-      background: $secondary-bg-color;
-      border: none;
-      text-transform: uppercase;
+    #activities {
+        border-top: 2px solid $primary-color;
+        background: rgba(0, 0, 0, 0.5);
     }
-  }
+    #chatBox {
+        button {
+            color: $primary-color;
+            background: $secondary-bg-color;
+            border: none;
+            text-transform: uppercase;
+        }
+    }
 }

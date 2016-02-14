@@ -1,7 +1,9 @@
 var gulp = require('gulp');
 var config = require('./config');
 var del = require('del');
-var plugins = require('gulp-load-plugins')({lazy:true});
+var plugins = require('gulp-load-plugins')({
+    lazy: true
+});
 
 gulp.task('styles', ['clean-styles'], function() {
     log('Compiling SASS --> CSS');
@@ -12,7 +14,7 @@ gulp.task('styles', ['clean-styles'], function() {
         .pipe(gulp.dest(config.css));
 });
 
-gulp.task('styles-watch', function(){
+gulp.task('styles-watch', function() {
     gulp.watch(config.sass, ['styles']);
 });
 
