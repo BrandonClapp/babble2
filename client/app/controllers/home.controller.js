@@ -1,29 +1,40 @@
 (function() {
     'use strict'
-    angular.module('babble').controller('home.controller', ['$scope', '$state', '$ocLazyLoad', 'socket', 'cache',
-    function($scope, $state, $ocLazyLoad, socket, cache) {
-
-        // todo: see if they have a jwt token
-        // if they do and its valid, check claims for server
-        // instead of using "lastConnectedServer"
+    angular.module('babble').controller('home.controller', ['$scope', '$state', '$ocLazyLoad', 'socket', 'cache', '$http',
+    function($scope, $state, $ocLazyLoad, socket, cache, $http) {
 
         $scope.showForm = false;
 
-        $scope.connect = function(host, port) {
-            if(!cache.ioLoaded) {
-                loadScript(host, port);
+        // if they have a token, attempt to connect with it.
+        function init() {
+            if(cache.getToken()) {
+                console.log('Had token in cache. Trying to connect with it.')
+                var token = cache.getToken();
+                var lastConnectedServer = cache.getLastConnectedServer();
+                $scope.connect(lastConnectedServer.host, lastConnectedServer.port, null, token);
             } else {
-                registerEvents(host, port);
+                // else show the form
+                console.log('No token in cache.')
+                $scope.showForm = true;
             }
         }
 
-        if(cache.getLastConnectedServer()) {
-            console.log('CACHED LAST SERVER EXISTS');
-            var lastConnectedServer = cache.getLastConnectedServer();
-            $scope.connect(lastConnectedServer.host, lastConnectedServer.port);
-        } else {
-            console.log('NO LAST CONNECTED SERVER');
-            $scope.showForm = true;
+        $scope.connect = function(host, port, creds, token) {
+            console.log('creds', creds);
+            $http.post('http://' + host + ':' + port + '/authenticate', {
+                username: creds ? creds.username : null,
+                password: creds ? creds.password : null,
+                token: token
+            })
+            .then(
+                function(resp) {
+                    cache.setToken(resp.data);
+                    !cache.ioLoaded ? loadScript(host, port) : registerEvents(host, port, cache.getToken());
+                },
+                function(err) {
+                    console.log('failed to authenticate.', err);
+                }
+            );
         }
 
         function loadScript(host, port) {
@@ -40,25 +51,20 @@
             }
         });
 
-        function checkSocketConnection() {
-            if(socket.connected()) {
-                $state.go('connected');
-            }
-        }
-
         function getHostUrl(host, port) {
             return 'http://' + host + ':' + port;
         }
 
         function scriptLoaded(host, port, cb) {
             cache.ioLoaded = true;
-            cb(host, port);
+            cb(host, port, cache.getToken());
         }
 
-        function registerEvents(host, port) {
+        function registerEvents(host, port, token) {
             socket.load(io, { // io is lazy loaded.
                 host: host,
-                port: port
+                port: port,
+                token: token
             });
 
             socket.forward('error', $scope);
@@ -80,5 +86,7 @@
                 console.log('disconnected');
             });
         }
+
+        init();
     }]);
 })();

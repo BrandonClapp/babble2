@@ -23,6 +23,7 @@
          socket.on('manual-dc', function() {
              console.log('manual-dc');
              cache.setLastConnectedServer();
+             cache.setToken();
              $state.go('home');
          });
 

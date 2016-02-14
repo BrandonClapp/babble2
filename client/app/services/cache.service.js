@@ -22,10 +22,29 @@
             return null;
         }
 
+        function getToken() {
+            var item = localStorage.getItem('token');
+            if(item) {
+                return JSON.parse(item);
+            }
+
+            return null;
+        }
+
+        function setToken(token) {
+            if(token) {
+                localStorage.setItem('token', JSON.stringify(token));
+            } else {
+                localStorage.setItem('token', '');
+            }
+        }
+
         return {
             ioLoaded: false,
             setLastConnectedServer: setLastConnectedServer,
-            getLastConnectedServer: getLastConnectedServer
+            getLastConnectedServer: getLastConnectedServer,
+            getToken: getToken,
+            setToken: setToken
         }
     }]);
 })();

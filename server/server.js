@@ -1,19 +1,26 @@
 (() => {
     'use strict'
-    var app = require('express')();
-    var server = require('http').Server(app);
-    var io = require('socket.io')(server);
-    var socketioJwt = require('socketio-jwt');
-    var _ = require('lodash-node');
+    let app =           require('express')();
+    let server =        require('http').Server(app);
+    let io =            require('socket.io')(server);
+    let socketioJwt =   require('socketio-jwt');
+    let _ =             require('lodash-node');
+    let tokenIssuer =   require('./tokenIssuer.js');
+    let secret =        require('./secret.js')();
 
     server.listen(9000);
 
     // todo: add logic to disconnect clients after a period of inactivity.
     // todo: add caching for things that should be persisted.
 
-    // app.get('/', function (req, res) {
-    //   res.sendfile(__dirname + '/index.html');
-    // });
+    // enable CORS
+    app.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      next();
+    });
+
+    tokenIssuer.expose(app);
 
     // testing
     var connectedSockets = [];
@@ -28,7 +35,7 @@
     //////////
 
     io.use(socketioJwt.authorize({
-      secret: 'your secret or public key',
+      secret: secret,
       handshake: true
     }));
 

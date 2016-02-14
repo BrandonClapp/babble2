@@ -5,7 +5,6 @@
     angular.module('babble').factory('socket', ['$timeout', '$rootScope', function($timeout, $rootScope) {
         var socket = null;
         var prefix = 'socket:';
-        var dataHost = 'http://localhost:9000/'
 
         var asyncAngularify = function(socket, callback) {
             return callback ? function() {
@@ -18,7 +17,7 @@
 
         function on(evt, callback) {
             if(socket) {
-                socket.on(evt, callback.__ng = asyncAngularify(socket, callback));    
+                socket.on(evt, callback.__ng = asyncAngularify(socket, callback));
             }
 
         }
@@ -71,7 +70,9 @@
                 if(!socket.connected) {
                     // if not, connect it.
                     console.log('it is not connected, attempting to connect');
-                    socket = io.connect('http://' + config.host + ':' + config.port);
+                    socket = io.connect('http://' + config.host + ':' + config.port, {
+                      'query': 'token=' + config.token
+                    });
                 } else {
                     // do nothing
                     console.log('it is already connected, returning');
@@ -81,7 +82,9 @@
             } else {
                 // there is not a socket
                 console.log('there is not a socket, attempting to connect');
-                socket = io.connect('http://' + config.host + ':' + config.port);
+                socket = io.connect('http://' + config.host + ':' + config.port, {
+                  'query': 'token=' + config.token
+                });
             }
         }
 
