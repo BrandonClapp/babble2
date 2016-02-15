@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Babbletron Login</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/external/normalize-css/normalize.css">
+  <link href="/styles/index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <form class="login">
+      <p class="title">Log in</p>
+      <input type="text" placeholder="Username" autofocus/>
+      <i class="fa fa-user"></i>
+      <input type="password" placeholder="Password" />
+      <i class="fa fa-key"></i>
+      <a href="#">Forgot your password?</a>
+      <button>
+        <i class="spinner"></i>
+        <span class="state">Log in</span>
+      </button>
+    </form>
+    <footer>battletron</footer>
+  </div>
+  <script src='/external/jquery/dist/jquery.js'></script>
+
+  <script>
+    var working = false;
+    $('.login').on('submit', function(e) {
+      e.preventDefault();
+      if (working) return;
+      working = true;
+      var $this = $(this),
+        $state = $this.find('button > .state');
+      $this.addClass('loading');
+      $state.html('Authenticating');
+      setTimeout(function() {
+        $this.addClass('ok');
+        $state.html('Welcome back!');
+        setTimeout(function() {
+          $state.html('Log in');
+          $this.removeClass('ok loading');
+          working = false;
+        }, 4000);
+      }, 3000);
+    });
+  </script>
+
+</body>
+
+</html>

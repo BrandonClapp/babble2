@@ -5,13 +5,13 @@
 
 <hr />
 <p>
-    <input type="text" ng-model="chatMessage" />
-    <button ng-click="sendMessage(chatMessage)">Send</button>
+  <input type="text" ng-model="chatMessage" />
+  <button ng-click="sendMessage(chatMessage)">Send</button>
 </p>
 <hr />
 
 <ul>
-    <li ng-repeat="msg in chatMessages track by $index">{{msg}}</li>
+  <li ng-repeat="msg in chatMessages track by $index">{{msg}}</li>
 </ul>
 
 <div>{{news}}</div>

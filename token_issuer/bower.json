@@ -1,0 +1,22 @@
+{
+  "name": "token_issuer",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Brandon Clapp <clapp09@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/BrandonClapp/babbletron",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.0",
+    "normalize-css": "normalize.css#^3.0.3"
+  }
+}
