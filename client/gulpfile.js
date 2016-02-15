@@ -5,13 +5,22 @@ var plugins = require('gulp-load-plugins')({
     lazy: true
 });
 
-gulp.task('styles', ['clean-styles'], function() {
+gulp.task('styles', ['clean-styles', 'login-styles'], function() {
     log('Compiling SASS --> CSS');
     return gulp
         .src(config.sass)
         .pipe(plugins.sass().on('error', log))
         .pipe(plugins.autoprefixer())
         .pipe(gulp.dest(config.css));
+});
+
+gulp.task('login-styles', function() {
+    log('Compiling Login SASS --> CSS');
+    return gulp
+        .src(config.login_sass)
+        .pipe(plugins.sass().on('error', log))
+        .pipe(plugins.autoprefixer())
+        .pipe(gulp.dest(config.login_css));
 });
 
 gulp.task('styles-watch', function() {

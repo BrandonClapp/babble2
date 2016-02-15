@@ -1,15 +1,24 @@
-((config, express, jsonParser, jwt, secret) => {
+((config, express, parser, jwt, secret) => {
   'use strict'
   var app = express();
 
   app.use('/styles', express.static(__dirname + '/assets/styles/css'));
   app.use('/external', express.static(__dirname + '/bower_components'));
 
+  // enable CORS
+  app.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      next();
+  });
+
   app.listen(config.port, (req, res) => {
     console.log('Token issuer - listening on port ' + config.port);
   });
 
   app.get('/', (req, res) => {
+    // if user has valid token, redirect them to the app.
+    // otherwise send to login screen.
     res.sendFile(__dirname + '/index.html');
   });
 
@@ -18,10 +27,11 @@
       return (username === 'Brandon' && password === 'test');
   }
 
-  app.post('/authenticate/creds/', jsonParser, (req, res) => {
+  app.post('/authenticate/creds/', parser, (req, res) => {
     if (!req.body) return res.sendStatus(400);
     let username = req.body.username;
     let password = req.body.password;
+    console.log('request body', req.body);
 
     console.log('Attempting to validate credentials', { username: username, password: password });
 
@@ -31,6 +41,8 @@
       }, secret);
       res.send(token);
     }
+
+    res.sendStatus(401);
 
   });
 
@@ -59,13 +71,13 @@
   //     res.send(token);
   //   }
 
-    res.sendStatus(401)
-  });
+  //   res.sendStatus(401)
+  // });
 
 })(
   require('./config.js'), // maybe need better paths
   require('express'),
-  require('body-parser').json(),
+  require('body-parser').urlencoded(),
   require('jsonwebtoken'),
   require('./secret')()
-)
+);

@@ -7,7 +7,7 @@
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/external/normalize-css/normalize.css">
-  <link href="/styles/index.css" rel="stylesheet" type="text/css" />
+  <link href="/login/styles/index.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -15,9 +15,9 @@
   <div class="wrapper">
     <form class="login">
       <p class="title">Log in</p>
-      <input type="text" placeholder="Username" autofocus/>
+      <input type="text" id="username" placeholder="Username" autofocus/>
       <i class="fa fa-user"></i>
-      <input type="password" placeholder="Password" />
+      <input type="password" id="password" placeholder="Password" />
       <i class="fa fa-key"></i>
       <a href="#">Forgot your password?</a>
       <button>
@@ -35,19 +35,37 @@
       e.preventDefault();
       if (working) return;
       working = true;
-      var $this = $(this),
-        $state = $this.find('button > .state');
+      var $this = $(this);
+      var $state = $this.find('button > .state');
+
+      var username = $('#username').val();
+      var password = $('#password').val();
+
       $this.addClass('loading');
       $state.html('Authenticating');
-      setTimeout(function() {
-        $this.addClass('ok');
-        $state.html('Welcome back!');
-        setTimeout(function() {
+
+      $.post('http://localhost:3002/authenticate/creds/', {
+          "username": username,
+          "password": password
+        })
+        .done(function(data, status) {
+
+          $this.addClass('ok');
+          $state.html('Welcome back!');
+
+          localStorage.setItem('token', JSON.stringify(data));
+
+          setTimeout(function() {
+            // redirect to ?ru=<this>
+            location.href = 'http://localhost:3000';
+          }, 2000);
+        })
+        .fail(function(xhr) {
+          console.log('failure', xhr.responseText);
           $state.html('Log in');
           $this.removeClass('ok loading');
           working = false;
-        }, 4000);
-      }, 3000);
+        });
     });
   </script>
 

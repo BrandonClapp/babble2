@@ -5,36 +5,25 @@
 
             $scope.showForm = false;
 
+            cache.setLastConnectedServer({ host: 'localhost', port: '9000' });
+
             // if they have a token, attempt to connect with it.
             function init() {
                 if (cache.getToken()) {
                     console.log('Had token in cache. Trying to connect with it.')
                     var token = cache.getToken();
                     var lastConnectedServer = cache.getLastConnectedServer();
-                    $scope.connect(lastConnectedServer.host, lastConnectedServer.port, null, token);
+                    $scope.connect(lastConnectedServer.host, lastConnectedServer.port, token);
                 } else {
                     // else show the form
                     console.log('No token in cache.')
                     $scope.showForm = true;
+                    location.href = '/authenticate'; //config.tokenIssuer;
                 }
             }
 
-            $scope.connect = function(host, port, creds, token) {
-                console.log('creds', creds);
-                $http.post('http://' + host + ':' + port + '/authenticate', {
-                        username: creds ? creds.username : null,
-                        password: creds ? creds.password : null,
-                        token: token
-                    })
-                    .then(
-                        function(resp) {
-                            cache.setToken(resp.data);
-                            !cache.ioLoaded ? loadScript(host, port) : registerEvents(host, port, cache.getToken());
-                        },
-                        function(err) {
-                            console.log('failed to authenticate.', err);
-                        }
-                    );
+            $scope.connect = function(host, port, token) {
+                !cache.ioLoaded ? loadScript(host, port) : registerEvents(host, port, cache.getToken());
             }
 
             function loadScript(host, port) {
@@ -43,9 +32,12 @@
             }
 
             $scope.$on('ocLazyLoad.fileLoaded', function(e, file) {
-                if ($scope.host && $scope.port) {
-                    scriptLoaded($scope.host, $scope.port, registerEvents);
-                } else if (cache.getLastConnectedServer()) {
+
+                // if ($scope.host && $scope.port) {
+                //     scriptLoaded($scope.host, $scope.port, registerEvents);
+                // } else
+
+                 if (cache.getLastConnectedServer()) {
                     var lastConnected = cache.getLastConnectedServer();
                     scriptLoaded(lastConnected.host, lastConnected.port, registerEvents);
                 }
