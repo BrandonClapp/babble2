@@ -1,7 +1,7 @@
 body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  background: url("http://i.imgur.com/HgflTDf.jpg") 50% fixed;
+  background: url("https://images.unsplash.com/photo-1442405740009-7b57cca9d316?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1225") 50% fixed;
   background-size: cover; }
 
 @-webkit-keyframes spinner {
